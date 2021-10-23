@@ -1,0 +1,60 @@
+baseURL = 'https://jsnv.dev/'
+languageCode = 'en-us'
+title = 'jsn>'
+theme = 'cactus'
+
+# Main menu which appears below site header.
+[[menu.main]]
+name = "~/"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "~/posts"
+url = "/posts"
+weight = 2
+
+[[menu.main]]
+name = "~/tags"
+url = "/tags"
+weight = 3
+
+[[menu.main]]
+name = "~/about"
+url = "/about"
+weight = 4
+
+[[menu.main]]
+name = "~/work"
+url = "/work"
+weight = 5
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+    tabWidth = 2
+    pygmentsUseClasses = true
+    pygmentsCodefences = true
+
+[params]
+    showProjectsList = true
+    projectsUrl = "https://github.com/jsnv-dev"
+    colortheme = "dark"
+    tocInline = false
+    tagsOverview = true
+  [[params.social]]
+    name = "github"
+    link = "https://github.com/jsnv-dev"
+  [[params.social]]
+    name = "linkedin"
+    link = "https://www.linkedin.com/in/jasonvillaluna"
