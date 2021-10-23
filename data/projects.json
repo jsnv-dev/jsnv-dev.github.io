@@ -1,0 +1,9 @@
+{
+  "list": [
+    {
+      "name":"SLAE x86 Codes",
+      "url":"https://github.com/jsnv-dev/slae_x86_assignments/",
+      "desc":"Codes created for completing the requirements of the SecurityTube Linux Assembly Expert certification"
+    }
+  ]
+}
