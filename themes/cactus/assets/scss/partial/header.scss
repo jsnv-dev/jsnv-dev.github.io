@@ -31,10 +31,11 @@
     background-repeat: no-repeat;
     @if $logo-grayout {
       filter: grayscale(100%);
-      -webkit-filter: grayscale(100%);
+      -webkit-filter: sepia(100%) grayscale(40%) contrast(150%);
     }
   }
   #nav {
+    padding-top: 15px;
     color: $color-accent-1;
     letter-spacing: .01em;
     font-weight: 200;
