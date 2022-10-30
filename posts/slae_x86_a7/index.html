@@ -1,189 +1,22 @@
-<!doctype html><html lang=en-us>
-<head>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<script type=text/javascript src=../../static/js/cactus.js></script>
-<link rel=stylesheet href=../../static/css/style.css type=text/css>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title> SLAE x86 - Assignment 0x7 | jsn></title>
-<link rel=canonical href=https://jsnv.dev/posts/slae_x86_a7/>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="all,follow">
-<meta name=googlebot content="index,follow,snippet,archive">
-<meta property="og:title" content="SLAE x86 - Assignment 0x7">
-<meta property="og:description" content="Custom Shellcode Crypter Objectives  Create a custom crypter Free to use any existing encryption schema Use any programming language  Crypter Another process to conceal a shellcode by means of encrypting with different schema. &ldquo;Encryption is the foundation of modern security.&#34; as snowden mentioned. In case of exploit development, it is another technique such as Encoding & Polymorphism from previous assignments to make detection harder.
-Advanced Encryption Standard (AES) The AES is originally Rijndael cipher, the winner of the NIST&rsquo;s AES selection, is widely used.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://jsnv.dev/posts/slae_x86_a7/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-10-23T05:05:06+00:00">
-<meta property="article:modified_time" content="2021-10-23T05:05:06+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="SLAE x86 - Assignment 0x7">
-<meta name=twitter:description content="Custom Shellcode Crypter Objectives  Create a custom crypter Free to use any existing encryption schema Use any programming language  Crypter Another process to conceal a shellcode by means of encrypting with different schema. &ldquo;Encryption is the foundation of modern security.&#34; as snowden mentioned. In case of exploit development, it is another technique such as Encoding & Polymorphism from previous assignments to make detection harder.
-Advanced Encryption Standard (AES) The AES is originally Rijndael cipher, the winner of the NIST&rsquo;s AES selection, is widely used.">
-<link rel=stylesheet href=https://jsnv.dev/css/styles.9479e3a8e1c8ac41c28e4e18ad549766e3ce2e4e49cab5d83920f533288fc6ac9a9d4f224545bce5d12c4132b271982f4c421aa0c6a8e548abbbddf171e1caeb.css integrity="sha512-lHnjqOHIrEHCjk4YrVSXZuPOLk5JyrXYOSD1MyiPxqyanU8iRUW85dEsQTKycZgvTEIaoMao5Uiru93xceHK6w=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
-<script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
-<link rel=icon type=image/png href=https://jsnv.dev/images/favicon.ico>
-</head>
-<body class="max-width mx-auto px3 ltr">
-<div class="content index py4">
-<div id=header-post>
-<a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
+<!doctype html><html lang=en-us><head><link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous><script type=text/javascript src=../../static/js/cactus.js></script>
+<link rel=stylesheet href=../../static/css/style.css type=text/css><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>SLAE x86 - Assignment 0x7 | jsn></title><link rel=canonical href=https://jsnv.dev/posts/slae_x86_a7/><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="all,follow"><meta name=googlebot content="index,follow,snippet,archive"><meta property="og:title" content="SLAE x86 - Assignment 0x7"><meta property="og:description" content="Custom Shellcode Crypter Objectives Create a custom crypter Free to use any existing encryption schema Use any programming language Crypter Another process to conceal a shellcode by means of encrypting with different schema. &ldquo;Encryption is the foundation of modern security.&rdquo; as snowden mentioned. In case of exploit development, it is another technique such as Encoding & Polymorphism from previous assignments to make detection harder.
+Advanced Encryption Standard (AES) The AES is originally Rijndael cipher, the winner of the NIST&rsquo;s AES selection, is widely used."><meta property="og:type" content="article"><meta property="og:url" content="https://jsnv.dev/posts/slae_x86_a7/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-10-23T05:05:06+00:00"><meta property="article:modified_time" content="2021-10-23T05:05:06+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="SLAE x86 - Assignment 0x7"><meta name=twitter:description content="Custom Shellcode Crypter Objectives Create a custom crypter Free to use any existing encryption schema Use any programming language Crypter Another process to conceal a shellcode by means of encrypting with different schema. &ldquo;Encryption is the foundation of modern security.&rdquo; as snowden mentioned. In case of exploit development, it is another technique such as Encoding & Polymorphism from previous assignments to make detection harder.
+Advanced Encryption Standard (AES) The AES is originally Rijndael cipher, the winner of the NIST&rsquo;s AES selection, is widely used."><link rel=stylesheet href=https://jsnv.dev/css/styles.9479e3a8e1c8ac41c28e4e18ad549766e3ce2e4e49cab5d83920f533288fc6ac9a9d4f224545bce5d12c4132b271982f4c421aa0c6a8e548abbbddf171e1caeb.css integrity="sha512-lHnjqOHIrEHCjk4YrVSXZuPOLk5JyrXYOSD1MyiPxqyanU8iRUW85dEsQTKycZgvTEIaoMao5Uiru93xceHK6w=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
+<script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]--><link rel=icon type=image/png href=https://jsnv.dev/images/favicon.ico></head><body class="max-width mx-auto px3 ltr"><div class="content index py4"><div id=header-post><a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
 <a id=menu-icon-tablet href=#><i class="fas fa-bars fa-lg"></i></a>
-<a id=top-icon-tablet href=# onclick="$('html, body').animate({scrollTop:0},'fast')" style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
-<span id=menu>
-<span id=nav>
-<ul>
-<li><a href=/>~/</a></li>
-<li><a href=/posts>~/posts</a></li>
-<li><a href=/tags>~/tags</a></li>
-<li><a href=/about>~/about</a></li>
-<li><a href=/work>~/work</a></li>
-</ul>
-</span>
-<br>
-<span id=actions>
-<ul>
-<li>
-<a class=icon href=https://jsnv.dev/posts/slae_x86_a6/ aria-label=Previous>
-<i class="fas fa-chevron-left" aria-hidden=true onmouseover="$('#i-prev').toggle()" onmouseout="$('#i-prev').toggle()"></i>
-</a>
-</li>
-<li>
-<a class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
-<i class="fas fa-chevron-up" aria-hidden=true onmouseover="$('#i-top').toggle()" onmouseout="$('#i-top').toggle()"></i>
-</a>
-</li>
-<li>
-<a class=icon href=# aria-label=Share>
-<i class="fas fa-share-alt" aria-hidden=true onmouseover="$('#i-share').toggle()" onmouseout="$('#i-share').toggle()" onclick="return $('#share').toggle(),!1"></i>
-</a>
-</li>
-</ul>
-<span id=i-prev class=info style=display:none>Previous post</span>
+<a id=top-icon-tablet href=# onclick='$("html, body").animate({scrollTop:0},"fast")' style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+<span id=menu><span id=nav><ul><li><a href=/>~/</a></li><li><a href=/posts>~/posts</a></li><li><a href=/tags>~/tags</a></li><li><a href=/about>~/about</a></li><li><a href=/work>~/work</a></li></ul></span><br><span id=actions><ul><li><a class=icon href=https://jsnv.dev/posts/slae_x86_a6/ aria-label=Previous><i class="fas fa-chevron-left" aria-hidden=true onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li><li><a class=icon href=# onclick='$("html, body").animate({scrollTop:0},"fast")' aria-label="Top of Page"><i class="fas fa-chevron-up" aria-hidden=true onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li><li><a class=icon href=# aria-label=Share><i class="fas fa-share-alt" aria-hidden=true onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li></ul><span id=i-prev class=info style=display:none>Previous post</span>
 <span id=i-next class=info style=display:none>Next post</span>
 <span id=i-top class=info style=display:none>Back to top</span>
-<span id=i-share class=info style=display:none>Share post</span>
-</span>
-<br>
-<div id=share style=display:none>
-<ul>
-<li>
-<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f" aria-label=Facebook>
-<i class="fab fa-facebook" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&text=SLAE%20x86%20-%20Assignment%200x7" aria-label=Twitter>
-<i class="fab fa-twitter" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=Linkedin>
-<i class="fab fa-linkedin" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&is_video=false&description=SLAE%20x86%20-%20Assignment%200x7" aria-label=Pinterest>
-<i class="fab fa-pinterest" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="mailto:?subject=SLAE%20x86%20-%20Assignment%200x7&body=Check out this article: https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f" aria-label=Email>
-<i class="fas fa-envelope" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=Pocket>
-<i class="fab fa-get-pocket" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=reddit>
-<i class="fab fa-reddit" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&name=SLAE%20x86%20-%20Assignment%200x7&description=Custom%20Shellcode%20Crypter%20Objectives%20%20Create%20a%20custom%20crypter%20Free%20to%20use%20any%20existing%20encryption%20schema%20Use%20any%20programming%20language%20%20Crypter%20Another%20process%20to%20conceal%20a%20shellcode%20by%20means%20of%20encrypting%20with%20different%20schema.%20%26ldquo%3bEncryption%20is%20the%20foundation%20of%20modern%20security.%26quot%3b%20as%20snowden%20mentioned.%20In%20case%20of%20exploit%20development%2c%20it%20is%20another%20technique%20such%20as%20Encoding%20%26amp%3b%20Polymorphism%20from%20previous%20assignments%20to%20make%20detection%20harder.%0aAdvanced%20Encryption%20Standard%20%28AES%29%20The%20AES%20is%20originally%20Rijndael%20cipher%2c%20the%20winner%20of%20the%20NIST%26rsquo%3bs%20AES%20selection%2c%20is%20widely%20used." aria-label=Tumblr>
-<i class="fab fa-tumblr" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&t=SLAE%20x86%20-%20Assignment%200x7" aria-label="Hacker News">
-<i class="fab fa-hacker-news" aria-hidden=true></i>
-</a>
-</li>
-</ul>
-</div>
-<div id=toc>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#objectives>Objectives</a></li>
-<li><a href=#crypter>Crypter</a></li>
-<li><a href=#advanced-encryption-standard-aes>Advanced Encryption Standard (AES)</a>
-<ul>
-<li><a href=#ruby-script>Ruby Script</a>
-<ul>
-<li><a href=#script-usage-and-testing>Script usage and testing</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</span>
-</div>
-<article class=post itemscope itemtype=http://schema.org/BlogPosting>
-<header>
-<h1 class=posttitle itemprop="name headline">
-SLAE x86 - Assignment 0x7
-</h1>
-<div class=meta>
-<div class=postdate>
-<time datetime="2021-10-23 05:05:06 +0000 UTC" itemprop=datePublished>2021-10-23</time>
-</div>
-<div class=article-read-time>
-<i class="far fa-clock"></i>
-4 minute read
-</div>
-<div class=article-category>
-<i class="fas fa-archive"></i>
-<a class=category-link href=/categories/certification>certification</a>
-</div>
-<div class=article-tag>
-<i class="fas fa-tag"></i>
+<span id=i-share class=info style=display:none>Share post</span></span><br><div id=share style=display:none><ul><li><a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f" aria-label=Facebook><i class="fab fa-facebook" aria-hidden=true></i></a></li><li><a class=icon href="https://twitter.com/share?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&text=SLAE%20x86%20-%20Assignment%200x7" aria-label=Twitter><i class="fab fa-twitter" aria-hidden=true></i></a></li><li><a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=Linkedin><i class="fab fa-linkedin" aria-hidden=true></i></a></li><li><a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&is_video=false&description=SLAE%20x86%20-%20Assignment%200x7" aria-label=Pinterest><i class="fab fa-pinterest" aria-hidden=true></i></a></li><li><a class=icon href="mailto:?subject=SLAE%20x86%20-%20Assignment%200x7&body=Check out this article: https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f" aria-label=Email><i class="fas fa-envelope" aria-hidden=true></i></a></li><li><a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=Pocket><i class="fab fa-get-pocket" aria-hidden=true></i></a></li><li><a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=reddit><i class="fab fa-reddit" aria-hidden=true></i></a></li><li><a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&name=SLAE%20x86%20-%20Assignment%200x7&description=Custom%20Shellcode%20Crypter%20Objectives%20Create%20a%20custom%20crypter%20Free%20to%20use%20any%20existing%20encryption%20schema%20Use%20any%20programming%20language%20Crypter%20Another%20process%20to%20conceal%20a%20shellcode%20by%20means%20of%20encrypting%20with%20different%20schema.%20%26ldquo%3bEncryption%20is%20the%20foundation%20of%20modern%20security.%26rdquo%3b%20as%20snowden%20mentioned.%20In%20case%20of%20exploit%20development%2c%20it%20is%20another%20technique%20such%20as%20Encoding%20%26amp%3b%20Polymorphism%20from%20previous%20assignments%20to%20make%20detection%20harder.%0aAdvanced%20Encryption%20Standard%20%28AES%29%20The%20AES%20is%20originally%20Rijndael%20cipher%2c%20the%20winner%20of%20the%20NIST%26rsquo%3bs%20AES%20selection%2c%20is%20widely%20used." aria-label=Tumblr><i class="fab fa-tumblr" aria-hidden=true></i></a></li><li><a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&t=SLAE%20x86%20-%20Assignment%200x7" aria-label="Hacker News"><i class="fab fa-hacker-news" aria-hidden=true></i></a></li></ul></div><div id=toc><nav id=TableOfContents><ul><li><a href=#objectives>Objectives</a></li><li><a href=#crypter>Crypter</a></li><li><a href=#advanced-encryption-standard-aes>Advanced Encryption Standard (AES)</a><ul><li><a href=#ruby-script>Ruby Script</a><ul><li><a href=#script-usage-and-testing>Script usage and testing</a></li></ul></li></ul></li></ul></nav></div></span></div><article class=post itemscope itemtype=http://schema.org/BlogPosting><header><h1 class=posttitle itemprop="name headline">SLAE x86 - Assignment 0x7</h1><div class=meta><div class=postdate><time datetime="2021-10-23 05:05:06 +0000 UTC" itemprop=datePublished>2021-10-23</time></div><div class=article-read-time><i class="far fa-clock"></i>
+4 minute read</div><div class=article-category><i class="fas fa-archive"></i>
+<a class=category-link href=/categories/certification>certification</a></div><div class=article-tag><i class="fas fa-tag"></i>
 <a class=tag-link href=/tags/exploit_dev rel=tag>exploit_dev</a>
 ,
-<a class=tag-link href=/tags/assembly rel=tag>assembly</a>
-</div>
-</div>
-</header>
-<div class=content itemprop=articleBody>
-<h1 id=custom-shellcode-crypter>Custom Shellcode Crypter</h1>
-<h2 id=objectives>Objectives</h2>
-<ul>
-<li>Create a custom crypter</li>
-<li>Free to use any existing encryption schema</li>
-<li>Use any programming language</li>
-</ul>
-<h2 id=crypter>Crypter</h2>
-<p>Another process to conceal a shellcode by means of encrypting with different schema. <em>&ldquo;Encryption is the foundation of modern security."</em> as <a href=https://twitter.com/Snowden/status/1451205615838183426>snowden mentioned</a>. In case of exploit development, it is another technique such as <a href=../slae_x86_a4>Encoding</a> & <a href=../slae_x86_a6>Polymorphism</a> from previous assignments to make detection harder.</p>
-<h2 id=advanced-encryption-standard-aes>Advanced Encryption Standard (AES)</h2>
-<p>The AES is originally Rijndael cipher, the winner of the NIST&rsquo;s AES selection, is widely used. It can be implemented with 128, 192, or 256 bits of key.
-The algorithm consist of several steps: sub bytes, shift rows, mix columns, & add round key. More details of the process here: <a href=https://formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng-html5.html>https://formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng-html5.html</a>.</p>
-<p>Fortunately, AES can be implemented using the <a href=https://github.com/ruby/openssl><code>OpenSSL</code></a> gem in Ruby. With the <a href=https://ruby.github.io/openssl/OpenSSL/Cipher.html><code>Cipher</code></a> class, AES with 256-bit key can be intantiated by:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=no>OpenSSL</span><span class=o>::</span><span class=no>Cipher</span><span class=o>.</span><span class=n>new</span><span class=p>(</span><span class=s1>&#39;AES-256-CBC&#39;</span><span class=p>)</span>
-</code></pre></div><p>Encryption and decryption are possible by passing the method <code>.encrypt</code> and <code>.decrypt</code> into the instance as decribed in the <a href=https://ruby.github.io/openssl/OpenSSL/Cipher.html#class-OpenSSL::Cipher-label-Choosing+either+encryption+or+decryption+mode>documentation</a>. Also, a key is passed using the <a href=https://ruby.github.io/openssl/OpenSSL/Cipher.html#class-OpenSSL::Cipher-label-Choosing+a+key><code>.key</code></a> method. But before passing the key, it can be processed further to make it 256-bit. OpenSSL&rsquo;s <a href=https://ruby.github.io/openssl/OpenSSL/Digest.html><code>Digest</code></a> class is capable of creating a 256-bit hash from an input data by using its <a href=https://ruby.github.io/openssl/OpenSSL/Digest.html#method-c-digest-label-Examples><code>.digest</code></a> method.</p>
-<h3 id=ruby-script>Ruby Script</h3>
-<p>Below Ruby script used the mentioned functionalities <a href=#advanced-encryption-standard-aes>above</a>. Comments are added to explain the functionality of the codes used.
-The script have three options in processing the shellcode: encrypt only, decode only, or decode & execute.</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>  1
+<a class=tag-link href=/tags/assembly rel=tag>assembly</a></div></div></header><div class=content itemprop=articleBody><h1 id=custom-shellcode-crypter>Custom Shellcode Crypter</h1><h2 id=objectives>Objectives</h2><ul><li>Create a custom crypter</li><li>Free to use any existing encryption schema</li><li>Use any programming language</li></ul><h2 id=crypter>Crypter</h2><p>Another process to conceal a shellcode by means of encrypting with different schema. <em>&ldquo;Encryption is the foundation of modern security.&rdquo;</em> as <a href=https://twitter.com/Snowden/status/1451205615838183426>snowden mentioned</a>. In case of exploit development, it is another technique such as <a href=../slae_x86_a4>Encoding</a> & <a href=../slae_x86_a6>Polymorphism</a> from previous assignments to make detection harder.</p><h2 id=advanced-encryption-standard-aes>Advanced Encryption Standard (AES)</h2><p>The AES is originally Rijndael cipher, the winner of the NIST&rsquo;s AES selection, is widely used. It can be implemented with 128, 192, or 256 bits of key.
+The algorithm consist of several steps: sub bytes, shift rows, mix columns, & add round key. More details of the process here: <a href=https://formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng-html5.html>https://formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng-html5.html</a>.</p><p>Fortunately, AES can be implemented using the <a href=https://github.com/ruby/openssl><code>OpenSSL</code></a> gem in Ruby. With the <a href=https://ruby.github.io/openssl/OpenSSL/Cipher.html><code>Cipher</code></a> class, AES with 256-bit key can be intantiated by:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=no>OpenSSL</span><span class=o>::</span><span class=no>Cipher</span><span class=o>.</span><span class=n>new</span><span class=p>(</span><span class=s1>&#39;AES-256-CBC&#39;</span><span class=p>)</span>
+</span></span></code></pre></div><p>Encryption and decryption are possible by passing the method <code>.encrypt</code> and <code>.decrypt</code> into the instance as decribed in the <a href=https://ruby.github.io/openssl/OpenSSL/Cipher.html#class-OpenSSL::Cipher-label-Choosing+either+encryption+or+decryption+mode>documentation</a>. Also, a key is passed using the <a href=https://ruby.github.io/openssl/OpenSSL/Cipher.html#class-OpenSSL::Cipher-label-Choosing+a+key><code>.key</code></a> method. But before passing the key, it can be processed further to make it 256-bit. OpenSSL&rsquo;s <a href=https://ruby.github.io/openssl/OpenSSL/Digest.html><code>Digest</code></a> class is capable of creating a 256-bit hash from an input data by using its <a href=https://ruby.github.io/openssl/OpenSSL/Digest.html#method-c-digest-label-Examples><code>.digest</code></a> method.</p><h3 id=ruby-script>Ruby Script</h3><p>Below Ruby script used the mentioned functionalities <a href=#advanced-encryption-standard-aes>above</a>. Comments are added to explain the functionality of the codes used.
+The script have three options in processing the shellcode: encrypt only, decode only, or decode & execute.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
 </span><span class=lnt>  2
 </span><span class=lnt>  3
 </span><span class=lnt>  4
@@ -322,273 +155,150 @@ The script have three options in processing the shellcode: encrypt only, decode 
 </span><span class=lnt>137
 </span><span class=lnt>138
 </span><span class=lnt>139
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=ch>#!/usr/bin/env ruby</span>
-<span class=c1># Author: Jason Villaluna</span>
-
-<span class=nb>require</span> <span class=s1>&#39;optparse&#39;</span>
-<span class=nb>require</span> <span class=s2>&#34;openssl&#34;</span>
-
-<span class=k>def</span> <span class=nf>run</span>
-  <span class=n>parse_args</span>
-  <span class=n>validate_inputs</span>
-  <span class=n>process_shellcode</span>
-<span class=k>rescue</span> <span class=no>OptionParser</span><span class=o>::</span><span class=no>MissingArgument</span>
-  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[33m[!] Missing argument:</span><span class=se>\e</span><span class=s2>[0m&#34;</span>
-  <span class=vi>@parser</span><span class=o>.</span><span class=n>parse</span> <span class=sx>%w[--help]</span>
-<span class=k>rescue</span> <span class=no>StandardError</span> <span class=o>=&gt;</span> <span class=n>e</span>
-  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[31m[-]</span><span class=se>\e</span><span class=s2>[0m Encountered: </span><span class=se>\e</span><span class=s2>[31m&#39;</span><span class=si>#{</span><span class=n>e</span><span class=o>.</span><span class=n>class</span><span class=si>}</span><span class=s2>&#39; </span><span class=si>#{</span><span class=n>e</span><span class=si>}</span><span class=se>\e</span><span class=s2>[0m&#34;</span>
-  <span class=nb>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
-<span class=k>end</span>
-
-<span class=c1># Simple check to validate cli arguments</span>
-<span class=k>def</span> <span class=nf>validate_inputs</span>
-  <span class=n>messages</span> <span class=o>=</span> <span class=o>[</span>
-    <span class=s2>&#34;Please provide both shellcode and key&#34;</span><span class=p>,</span>
-    <span class=s2>&#34;Please choose one from encrypt, decrypt_only, and decrypt_run&#34;</span>
-  <span class=o>]</span>
-  <span class=n>messages</span><span class=o>.</span><span class=n>shift</span> <span class=k>if</span> <span class=o>[</span><span class=vi>@shellcode</span><span class=p>,</span> <span class=vi>@key</span><span class=o>].</span><span class=n>all?</span> <span class=p>{</span> <span class=o>|</span><span class=n>arg</span><span class=o>|</span> <span class=n>arg</span> <span class=p>}</span>
-  <span class=n>messages</span><span class=o>.</span><span class=n>pop</span> <span class=k>if</span> <span class=o>[</span><span class=s1>&#39;encrypt&#39;</span><span class=p>,</span> <span class=s1>&#39;decrypt_only&#39;</span><span class=p>,</span> <span class=s1>&#39;decrypt_run&#39;</span><span class=o>].</span><span class=n>include?</span><span class=p>(</span><span class=vi>@execute</span><span class=p>)</span>
-  <span class=k>return</span> <span class=k>if</span> <span class=n>messages</span><span class=o>.</span><span class=n>empty?</span>
-
-  <span class=n>messages</span><span class=o>.</span><span class=n>each</span> <span class=p>{</span> <span class=o>|</span><span class=n>message</span><span class=o>|</span> <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[33m[!] </span><span class=si>#{</span><span class=n>message</span><span class=si>}</span><span class=se>\e</span><span class=s2>[0m&#34;</span> <span class=p>}</span>
-  <span class=nb>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
-<span class=k>end</span>
-
-<span class=c1># Choose which method to execute depending on the user&#39;s options</span>
-<span class=k>def</span> <span class=nf>process_shellcode</span>
-  <span class=k>case</span> <span class=vi>@execute</span>
-  <span class=k>when</span> <span class=sr>/^encrypt$/i</span>
-    <span class=n>encrypt_shellcode</span>
-  <span class=k>when</span> <span class=sr>/^decrypt_only$/i</span>
-    <span class=n>decrypt_only</span>
-  <span class=k>when</span> <span class=sr>/^decrypt_run$/i</span>
-    <span class=n>decrypt_run</span>
-  <span class=k>end</span>
-<span class=k>end</span>
-
-<span class=c1># Encrypt the shellcode with AES-256-CBC</span>
-<span class=k>def</span> <span class=nf>encrypt_shellcode</span>
-  <span class=n>encrypted_shellcode</span> <span class=o>=</span> <span class=n>aes</span><span class=p>(</span><span class=vi>@key</span><span class=p>,</span> <span class=vi>@shellcode</span><span class=p>)</span> <span class=p>{</span> <span class=o>|</span><span class=n>aes</span><span class=o>|</span> <span class=n>aes</span><span class=o>.</span><span class=n>encrypt</span> <span class=p>}</span>
-  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[32m[+] Encrypted successfully:</span><span class=se>\e</span><span class=s2>[0m &#34;</span><span class=p>\</span>
-    <span class=s2>&#34;&#39;</span><span class=si>#{</span><span class=n>encrypted_shellcode</span><span class=o>.</span><span class=n>to_s</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;C*&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>map</span> <span class=si>{</span> <span class=o>|</span><span class=n>c</span><span class=o>|</span> <span class=s1>&#39;\x%02x&#39;</span> <span class=o>%</span> <span class=n>c</span> <span class=si>}</span><span class=o>.</span><span class=n>join</span><span class=si>}</span><span class=s2>&#39;&#34;</span>
-<span class=k>end</span>
-
-<span class=c1># Decrypt the encrypted shellcode</span>
-<span class=k>def</span> <span class=nf>decrypt_shellcode</span>
-  <span class=n>shellcode</span> <span class=o>=</span> <span class=o>[</span><span class=vi>@shellcode</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;\\x&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>join</span><span class=o>].</span><span class=n>pack</span><span class=p>(</span><span class=s1>&#39;H*&#39;</span><span class=p>)</span>
-  <span class=n>aes</span><span class=p>(</span><span class=vi>@key</span><span class=p>,</span> <span class=n>shellcode</span><span class=p>)</span> <span class=p>{</span> <span class=o>|</span><span class=n>aes</span><span class=o>|</span> <span class=n>aes</span><span class=o>.</span><span class=n>decrypt</span> <span class=p>}</span>
-<span class=k>end</span>
-
-<span class=c1># Displays the decrypted shellcode in stdout</span>
-<span class=k>def</span> <span class=nf>decrypt_only</span>
-  <span class=n>decrypted_shellcode</span> <span class=o>=</span> <span class=n>decrypt_shellcode</span>
-  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[32m[+] Decrypted successfully:</span><span class=se>\e</span><span class=s2>[0m &#39;</span><span class=si>#{</span><span class=n>decrypted_shellcode</span><span class=si>}</span><span class=s2>&#39;&#34;</span>
-<span class=k>end</span>
-
-<span class=c1># Decrypt the shellcode, compile using &#39;shell.c&#39;, and then run</span>
-<span class=k>def</span> <span class=nf>decrypt_run</span>
-  <span class=vi>@decrypted_shellcode</span> <span class=o>=</span> <span class=n>decrypt_shellcode</span>
-  <span class=n>replace_shellcode</span>
-  <span class=n>compile_binary</span>
-  <span class=n>run_binary</span>
-<span class=k>end</span>
-
-<span class=c1># AES-256-CBC encryption and decryption</span>
-<span class=c1># depending on what code is pass in the block</span>
-<span class=k>def</span> <span class=nf>aes</span><span class=p>(</span><span class=n>key</span><span class=p>,</span> <span class=n>data</span><span class=p>)</span>
-  <span class=n>aes</span> <span class=o>=</span> <span class=no>OpenSSL</span><span class=o>::</span><span class=no>Cipher</span><span class=o>.</span><span class=n>new</span><span class=p>(</span><span class=s1>&#39;AES-256-CBC&#39;</span><span class=p>)</span>
-  <span class=k>yield</span><span class=p>(</span><span class=n>aes</span><span class=p>)</span>
-  <span class=n>aes</span><span class=o>.</span><span class=n>key</span> <span class=o>=</span> <span class=no>OpenSSL</span><span class=o>::</span><span class=no>Digest</span><span class=o>.</span><span class=n>digest</span><span class=p>(</span><span class=s2>&#34;SHA256&#34;</span><span class=p>,</span> <span class=n>key</span><span class=p>)</span>
-  <span class=n>aes</span><span class=o>.</span><span class=n>update</span><span class=p>(</span><span class=n>data</span><span class=p>)</span> <span class=o>+</span> <span class=n>aes</span><span class=o>.</span><span class=n>final</span>
-<span class=k>end</span>
-
-<span class=c1># Replace a value inside a file</span>
-<span class=k>def</span> <span class=nf>replace_content</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
-  <span class=n>file_content</span> <span class=o>=</span> <span class=no>File</span><span class=o>.</span><span class=n>read</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
-  <span class=k>yield</span><span class=p>(</span><span class=n>file_content</span><span class=p>)</span>
-  <span class=no>File</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span> <span class=n>file_content</span><span class=p>)</span>
-<span class=k>end</span>
-
-<span class=c1># Replace shellcode in the shellcode tester program</span>
-<span class=k>def</span> <span class=nf>replace_shellcode</span>
-  <span class=n>replace_content</span><span class=p>(</span><span class=s1>&#39;./shellcode.c&#39;</span><span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>c_code</span><span class=o>|</span>
-    <span class=n>c_code</span><span class=o>.</span><span class=n>gsub!</span><span class=p>(</span><span class=sr>/\&#34;\S+\&#34;\;/</span><span class=p>,</span> <span class=s2>&#34;</span><span class=se>\&#34;</span><span class=si>#{</span><span class=vi>@decrypted_shellcode</span><span class=si>}</span><span class=se>\&#34;</span><span class=s2>\;&#34;</span><span class=p>)</span>
-  <span class=k>end</span>
-<span class=k>end</span>
-
-<span class=c1># Compile the shellcode into binary with the help of the shellcode.c program</span>
-<span class=k>def</span> <span class=nf>compile_binary</span>
-  <span class=sb>`gcc -fno-stack-protector -m32 -z execstack shellcode.c -o shellcode 2&gt; /dev/null`</span>
-  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\n\e</span><span class=s2>[32m[+]</span><span class=se>\e</span><span class=s2>[0m Successfully generated </span><span class=se>\e</span><span class=s2>[32mshellcode</span><span class=se>\e</span><span class=s2>[0m &#34;</span>
-<span class=k>end</span>
-
-<span class=c1># Execute the shellcode binary</span>
-<span class=k>def</span> <span class=nf>run_binary</span>
-  <span class=nb>system</span><span class=p>(</span><span class=s1>&#39;./shellcode&#39;</span><span class=p>)</span>
-<span class=k>end</span>
-
-<span class=k>def</span> <span class=nf>parse_args</span>
-  <span class=vi>@parser</span> <span class=o>=</span> <span class=no>OptionParser</span><span class=o>.</span><span class=n>new</span> <span class=k>do</span> <span class=o>|</span><span class=n>opts</span><span class=o>|</span>
-    <span class=n>opts</span><span class=o>.</span><span class=n>banner</span> <span class=o>=</span> <span class=s2>&#34;Usage: </span><span class=si>#{</span><span class=vg>$0</span><span class=si>}</span><span class=s2> -s [shellcode] -k [key] -[e|d|r]&#34;</span>
-    <span class=n>opts</span><span class=o>.</span><span class=n>separator</span> <span class=s2>&#34;&#34;</span>
-    <span class=n>opts</span><span class=o>.</span><span class=n>separator</span> <span class=s2>&#34;Options:&#34;</span>
-
-    <span class=n>opts</span><span class=o>.</span><span class=n>on</span><span class=p>(</span><span class=s2>&#34;--shellcode&#34;</span><span class=p>,</span> <span class=s2>&#34;-s SHELLCODE&#34;</span><span class=p>,</span> <span class=s2>&#34;Input Shellcode&#34;</span><span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>value</span><span class=o>|</span>
-      <span class=vi>@shellcode</span> <span class=o>=</span> <span class=n>value</span>
-    <span class=k>end</span>
-
-    <span class=n>opts</span><span class=o>.</span><span class=n>on</span><span class=p>(</span><span class=s2>&#34;--key&#34;</span><span class=p>,</span> <span class=s2>&#34;-k KEY&#34;</span><span class=p>,</span> <span class=s2>&#34;Pass key&#34;</span><span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>value</span><span class=o>|</span>
-      <span class=vi>@key</span> <span class=o>=</span> <span class=n>value</span>
-    <span class=k>end</span>
-
-    <span class=n>opts</span><span class=o>.</span><span class=n>on</span><span class=p>(</span>
-      <span class=s2>&#34;--execute&#34;</span><span class=p>,</span> <span class=s2>&#34;-e [encrypt|decrypt_only|decrypt_run]&#34;</span><span class=p>,</span>
-      <span class=s2>&#34;</span><span class=se>\n\t\t</span><span class=s2>encrypt: displays encrypted shellcode&#34;</span><span class=p>\</span>
-      <span class=s2>&#34;</span><span class=se>\n\t\t</span><span class=s2>decrypt_only: displays decrypted shellcode:&#34;</span><span class=p>\</span>
-      <span class=s2>&#34;</span><span class=se>\n\t\t</span><span class=s2>decryp_run: decrypt, compile, and then run the shellcode&#34;</span>
-           <span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>value</span><span class=o>|</span>
-      <span class=vi>@execute</span> <span class=o>=</span> <span class=n>value</span><span class=o>&amp;.</span><span class=n>downcase</span>
-    <span class=k>end</span>
-
-    <span class=n>opts</span><span class=o>.</span><span class=n>on_tail</span><span class=p>(</span><span class=s2>&#34;--help&#34;</span><span class=p>,</span> <span class=s2>&#34;-h&#34;</span><span class=p>,</span> <span class=s2>&#34;Print options&#34;</span><span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>show_help</span><span class=o>|</span>
-      <span class=nb>warn</span> <span class=n>opts</span>
-      <span class=nb>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
-    <span class=k>end</span>
-  <span class=k>end</span>
-  <span class=vi>@parser</span><span class=o>.</span><span class=n>parse!</span>
-<span class=k>end</span>
-
-<span class=k>if</span> <span class=bp>__FILE__</span> <span class=o>==</span> <span class=vg>$PROGRAM_NAME</span>
-  <span class=n>run</span>
-<span class=k>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=script-usage-and-testing>Script usage and testing</h4>
-<p><img src=aes.gif alt></p>
-<hr>
-<p>This blog post has been created for completing the requirements of the SecurityTube Linux Assembly Expert certification: <a href=http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/>http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/</a></p>
-<p>Student ID: SLAE - 1558</p>
-<hr>
-<p><a href=https://github.com/jsnv-dev/slae_x86_assignments/tree/main/A7><code>Link to Github repository</code></a> | <a href=../slae_x86><code>Link to index page</code></a></p>
-</div>
-</article>
-<div id=footer-post-container>
-<div id=footer-post>
-<div id=nav-footer style=display:none>
-<ul>
-<li><a href=/>~/</a></li>
-<li><a href=/posts>~/posts</a></li>
-<li><a href=/tags>~/tags</a></li>
-<li><a href=/about>~/about</a></li>
-<li><a href=/work>~/work</a></li>
-</ul>
-</div>
-<div id=toc-footer style=display:none>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#objectives>Objectives</a></li>
-<li><a href=#crypter>Crypter</a></li>
-<li><a href=#advanced-encryption-standard-aes>Advanced Encryption Standard (AES)</a>
-<ul>
-<li><a href=#ruby-script>Ruby Script</a>
-<ul>
-<li><a href=#script-usage-and-testing>Script usage and testing</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-<div id=share-footer style=display:none>
-<ul>
-<li>
-<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f" aria-label=Facebook>
-<i class="fab fa-facebook fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&text=SLAE%20x86%20-%20Assignment%200x7" aria-label=Twitter>
-<i class="fab fa-twitter fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=Linkedin>
-<i class="fab fa-linkedin fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&is_video=false&description=SLAE%20x86%20-%20Assignment%200x7" aria-label=Pinterest>
-<i class="fab fa-pinterest fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="mailto:?subject=SLAE%20x86%20-%20Assignment%200x7&body=Check out this article: https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f" aria-label=Email>
-<i class="fas fa-envelope fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=Pocket>
-<i class="fab fa-get-pocket fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=reddit>
-<i class="fab fa-reddit fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&name=SLAE%20x86%20-%20Assignment%200x7&description=Custom%20Shellcode%20Crypter%20Objectives%20%20Create%20a%20custom%20crypter%20Free%20to%20use%20any%20existing%20encryption%20schema%20Use%20any%20programming%20language%20%20Crypter%20Another%20process%20to%20conceal%20a%20shellcode%20by%20means%20of%20encrypting%20with%20different%20schema.%20%26ldquo%3bEncryption%20is%20the%20foundation%20of%20modern%20security.%26quot%3b%20as%20snowden%20mentioned.%20In%20case%20of%20exploit%20development%2c%20it%20is%20another%20technique%20such%20as%20Encoding%20%26amp%3b%20Polymorphism%20from%20previous%20assignments%20to%20make%20detection%20harder.%0aAdvanced%20Encryption%20Standard%20%28AES%29%20The%20AES%20is%20originally%20Rijndael%20cipher%2c%20the%20winner%20of%20the%20NIST%26rsquo%3bs%20AES%20selection%2c%20is%20widely%20used." aria-label=Tumblr>
-<i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&t=SLAE%20x86%20-%20Assignment%200x7" aria-label="Hacker News">
-<i class="fab fa-hacker-news fa-lg" aria-hidden=true></i>
-</a>
-</li>
-</ul>
-</div>
-<div id=actions-footer>
-<a id=menu-toggle class=icon href=# onclick="return $('#nav-footer').toggle(),!1" aria-label=Menu>
-<i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
-<a id=toc-toggle class=icon href=# onclick="return $('#toc-footer').toggle(),!1" aria-label=TOC>
-<i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
-<a id=share-toggle class=icon href=# onclick="return $('#share-footer').toggle(),!1" aria-label=Share>
-<i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
-<a id=top style=display:none class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
-<i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a>
-</div>
-</div>
-</div>
-<footer id=footer>
-<div class=footer-left>
-Copyright &copy; 2021 jsn>
-<a class=icon target=_blank rel=noopener href=https://github.com/jsnv-dev aria-label=github>
-<i class="fab fa-github" aria-hidden=true></i>
-</a>
-<a class=icon target=_blank rel=noopener href=https://www.linkedin.com/in/jasonvillaluna aria-label=linkedin>
-<i class="fab fa-linkedin" aria-hidden=true></i>
-</a>
-</div>
-<div class=footer-right>
-<nav>
-<ul>
-<li><a href=/>~/</a></li>
-<li><a href=/posts>~/posts</a></li>
-<li><a href=/tags>~/tags</a></li>
-<li><a href=/about>~/about</a></li>
-<li><a href=/work>~/work</a></li>
-</ul>
-</nav>
-</div>
-</footer>
-</div>
-</body>
-<link rel=stylesheet href=/lib/font-awesome/css/all.min.css>
-<script src=/lib/jquery/jquery.min.js></script>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=ch>#!/usr/bin/env ruby</span>
+</span></span><span class=line><span class=cl><span class=c1># Author: Jason Villaluna</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>require</span> <span class=s1>&#39;optparse&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>require</span> <span class=s2>&#34;openssl&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>run</span>
+</span></span><span class=line><span class=cl>  <span class=n>parse_args</span>
+</span></span><span class=line><span class=cl>  <span class=n>validate_inputs</span>
+</span></span><span class=line><span class=cl>  <span class=n>process_shellcode</span>
+</span></span><span class=line><span class=cl><span class=k>rescue</span> <span class=no>OptionParser</span><span class=o>::</span><span class=no>MissingArgument</span>
+</span></span><span class=line><span class=cl>  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[33m[!] Missing argument:</span><span class=se>\e</span><span class=s2>[0m&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=vi>@parser</span><span class=o>.</span><span class=n>parse</span> <span class=sx>%w[--help]</span>
+</span></span><span class=line><span class=cl><span class=k>rescue</span> <span class=no>StandardError</span> <span class=o>=&gt;</span> <span class=n>e</span>
+</span></span><span class=line><span class=cl>  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[31m[-]</span><span class=se>\e</span><span class=s2>[0m Encountered: </span><span class=se>\e</span><span class=s2>[31m&#39;</span><span class=si>#{</span><span class=n>e</span><span class=o>.</span><span class=n>class</span><span class=si>}</span><span class=s2>&#39; </span><span class=si>#{</span><span class=n>e</span><span class=si>}</span><span class=se>\e</span><span class=s2>[0m&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Simple check to validate cli arguments</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>validate_inputs</span>
+</span></span><span class=line><span class=cl>  <span class=n>messages</span> <span class=o>=</span> <span class=o>[</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;Please provide both shellcode and key&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;Please choose one from encrypt, decrypt_only, and decrypt_run&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=o>]</span>
+</span></span><span class=line><span class=cl>  <span class=n>messages</span><span class=o>.</span><span class=n>shift</span> <span class=k>if</span> <span class=o>[</span><span class=vi>@shellcode</span><span class=p>,</span> <span class=vi>@key</span><span class=o>].</span><span class=n>all?</span> <span class=p>{</span> <span class=o>|</span><span class=n>arg</span><span class=o>|</span> <span class=n>arg</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=n>messages</span><span class=o>.</span><span class=n>pop</span> <span class=k>if</span> <span class=o>[</span><span class=s1>&#39;encrypt&#39;</span><span class=p>,</span> <span class=s1>&#39;decrypt_only&#39;</span><span class=p>,</span> <span class=s1>&#39;decrypt_run&#39;</span><span class=o>].</span><span class=n>include?</span><span class=p>(</span><span class=vi>@execute</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=k>if</span> <span class=n>messages</span><span class=o>.</span><span class=n>empty?</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>messages</span><span class=o>.</span><span class=n>each</span> <span class=p>{</span> <span class=o>|</span><span class=n>message</span><span class=o>|</span> <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[33m[!] </span><span class=si>#{</span><span class=n>message</span><span class=si>}</span><span class=se>\e</span><span class=s2>[0m&#34;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=nb>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Choose which method to execute depending on the user&#39;s options</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>process_shellcode</span>
+</span></span><span class=line><span class=cl>  <span class=k>case</span> <span class=vi>@execute</span>
+</span></span><span class=line><span class=cl>  <span class=k>when</span> <span class=sr>/^encrypt$/i</span>
+</span></span><span class=line><span class=cl>    <span class=n>encrypt_shellcode</span>
+</span></span><span class=line><span class=cl>  <span class=k>when</span> <span class=sr>/^decrypt_only$/i</span>
+</span></span><span class=line><span class=cl>    <span class=n>decrypt_only</span>
+</span></span><span class=line><span class=cl>  <span class=k>when</span> <span class=sr>/^decrypt_run$/i</span>
+</span></span><span class=line><span class=cl>    <span class=n>decrypt_run</span>
+</span></span><span class=line><span class=cl>  <span class=k>end</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Encrypt the shellcode with AES-256-CBC</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>encrypt_shellcode</span>
+</span></span><span class=line><span class=cl>  <span class=n>encrypted_shellcode</span> <span class=o>=</span> <span class=n>aes</span><span class=p>(</span><span class=vi>@key</span><span class=p>,</span> <span class=vi>@shellcode</span><span class=p>)</span> <span class=p>{</span> <span class=o>|</span><span class=n>aes</span><span class=o>|</span> <span class=n>aes</span><span class=o>.</span><span class=n>encrypt</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[32m[+] Encrypted successfully:</span><span class=se>\e</span><span class=s2>[0m &#34;</span><span class=p>\</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#39;</span><span class=si>#{</span><span class=n>encrypted_shellcode</span><span class=o>.</span><span class=n>to_s</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;C*&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>map</span> <span class=si>{</span> <span class=o>|</span><span class=n>c</span><span class=o>|</span> <span class=s1>&#39;\x%02x&#39;</span> <span class=o>%</span> <span class=n>c</span> <span class=si>}</span><span class=o>.</span><span class=n>join</span><span class=si>}</span><span class=s2>&#39;&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Decrypt the encrypted shellcode</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>decrypt_shellcode</span>
+</span></span><span class=line><span class=cl>  <span class=n>shellcode</span> <span class=o>=</span> <span class=o>[</span><span class=vi>@shellcode</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;\\x&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>join</span><span class=o>].</span><span class=n>pack</span><span class=p>(</span><span class=s1>&#39;H*&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>aes</span><span class=p>(</span><span class=vi>@key</span><span class=p>,</span> <span class=n>shellcode</span><span class=p>)</span> <span class=p>{</span> <span class=o>|</span><span class=n>aes</span><span class=o>|</span> <span class=n>aes</span><span class=o>.</span><span class=n>decrypt</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Displays the decrypted shellcode in stdout</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>decrypt_only</span>
+</span></span><span class=line><span class=cl>  <span class=n>decrypted_shellcode</span> <span class=o>=</span> <span class=n>decrypt_shellcode</span>
+</span></span><span class=line><span class=cl>  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\e</span><span class=s2>[32m[+] Decrypted successfully:</span><span class=se>\e</span><span class=s2>[0m &#39;</span><span class=si>#{</span><span class=n>decrypted_shellcode</span><span class=si>}</span><span class=s2>&#39;&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Decrypt the shellcode, compile using &#39;shell.c&#39;, and then run</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>decrypt_run</span>
+</span></span><span class=line><span class=cl>  <span class=vi>@decrypted_shellcode</span> <span class=o>=</span> <span class=n>decrypt_shellcode</span>
+</span></span><span class=line><span class=cl>  <span class=n>replace_shellcode</span>
+</span></span><span class=line><span class=cl>  <span class=n>compile_binary</span>
+</span></span><span class=line><span class=cl>  <span class=n>run_binary</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># AES-256-CBC encryption and decryption</span>
+</span></span><span class=line><span class=cl><span class=c1># depending on what code is pass in the block</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>aes</span><span class=p>(</span><span class=n>key</span><span class=p>,</span> <span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>aes</span> <span class=o>=</span> <span class=no>OpenSSL</span><span class=o>::</span><span class=no>Cipher</span><span class=o>.</span><span class=n>new</span><span class=p>(</span><span class=s1>&#39;AES-256-CBC&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>yield</span><span class=p>(</span><span class=n>aes</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>aes</span><span class=o>.</span><span class=n>key</span> <span class=o>=</span> <span class=no>OpenSSL</span><span class=o>::</span><span class=no>Digest</span><span class=o>.</span><span class=n>digest</span><span class=p>(</span><span class=s2>&#34;SHA256&#34;</span><span class=p>,</span> <span class=n>key</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>aes</span><span class=o>.</span><span class=n>update</span><span class=p>(</span><span class=n>data</span><span class=p>)</span> <span class=o>+</span> <span class=n>aes</span><span class=o>.</span><span class=n>final</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Replace a value inside a file</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>replace_content</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>file_content</span> <span class=o>=</span> <span class=no>File</span><span class=o>.</span><span class=n>read</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>yield</span><span class=p>(</span><span class=n>file_content</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=no>File</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span> <span class=n>file_content</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Replace shellcode in the shellcode tester program</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>replace_shellcode</span>
+</span></span><span class=line><span class=cl>  <span class=n>replace_content</span><span class=p>(</span><span class=s1>&#39;./shellcode.c&#39;</span><span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>c_code</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>    <span class=n>c_code</span><span class=o>.</span><span class=n>gsub!</span><span class=p>(</span><span class=sr>/\&#34;\S+\&#34;\;/</span><span class=p>,</span> <span class=s2>&#34;</span><span class=se>\&#34;</span><span class=si>#{</span><span class=vi>@decrypted_shellcode</span><span class=si>}</span><span class=se>\&#34;</span><span class=s2>\;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>end</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Compile the shellcode into binary with the help of the shellcode.c program</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>compile_binary</span>
+</span></span><span class=line><span class=cl>  <span class=sb>`gcc -fno-stack-protector -m32 -z execstack shellcode.c -o shellcode 2&gt; /dev/null`</span>
+</span></span><span class=line><span class=cl>  <span class=nb>puts</span> <span class=s2>&#34;</span><span class=se>\n\e</span><span class=s2>[32m[+]</span><span class=se>\e</span><span class=s2>[0m Successfully generated </span><span class=se>\e</span><span class=s2>[32mshellcode</span><span class=se>\e</span><span class=s2>[0m &#34;</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Execute the shellcode binary</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>run_binary</span>
+</span></span><span class=line><span class=cl>  <span class=nb>system</span><span class=p>(</span><span class=s1>&#39;./shellcode&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>parse_args</span>
+</span></span><span class=line><span class=cl>  <span class=vi>@parser</span> <span class=o>=</span> <span class=no>OptionParser</span><span class=o>.</span><span class=n>new</span> <span class=k>do</span> <span class=o>|</span><span class=n>opts</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>    <span class=n>opts</span><span class=o>.</span><span class=n>banner</span> <span class=o>=</span> <span class=s2>&#34;Usage: </span><span class=si>#{</span><span class=vg>$0</span><span class=si>}</span><span class=s2> -s [shellcode] -k [key] -[e|d|r]&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>opts</span><span class=o>.</span><span class=n>separator</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>opts</span><span class=o>.</span><span class=n>separator</span> <span class=s2>&#34;Options:&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>opts</span><span class=o>.</span><span class=n>on</span><span class=p>(</span><span class=s2>&#34;--shellcode&#34;</span><span class=p>,</span> <span class=s2>&#34;-s SHELLCODE&#34;</span><span class=p>,</span> <span class=s2>&#34;Input Shellcode&#34;</span><span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>value</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=vi>@shellcode</span> <span class=o>=</span> <span class=n>value</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>opts</span><span class=o>.</span><span class=n>on</span><span class=p>(</span><span class=s2>&#34;--key&#34;</span><span class=p>,</span> <span class=s2>&#34;-k KEY&#34;</span><span class=p>,</span> <span class=s2>&#34;Pass key&#34;</span><span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>value</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=vi>@key</span> <span class=o>=</span> <span class=n>value</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>opts</span><span class=o>.</span><span class=n>on</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;--execute&#34;</span><span class=p>,</span> <span class=s2>&#34;-e [encrypt|decrypt_only|decrypt_run]&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;</span><span class=se>\n\t\t</span><span class=s2>encrypt: displays encrypted shellcode&#34;</span><span class=p>\</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;</span><span class=se>\n\t\t</span><span class=s2>decrypt_only: displays decrypted shellcode:&#34;</span><span class=p>\</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;</span><span class=se>\n\t\t</span><span class=s2>decryp_run: decrypt, compile, and then run the shellcode&#34;</span>
+</span></span><span class=line><span class=cl>           <span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>value</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=vi>@execute</span> <span class=o>=</span> <span class=n>value</span><span class=o>&amp;.</span><span class=n>downcase</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>opts</span><span class=o>.</span><span class=n>on_tail</span><span class=p>(</span><span class=s2>&#34;--help&#34;</span><span class=p>,</span> <span class=s2>&#34;-h&#34;</span><span class=p>,</span> <span class=s2>&#34;Print options&#34;</span><span class=p>)</span> <span class=k>do</span> <span class=o>|</span><span class=n>show_help</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=nb>warn</span> <span class=n>opts</span>
+</span></span><span class=line><span class=cl>      <span class=nb>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>  <span class=k>end</span>
+</span></span><span class=line><span class=cl>  <span class=vi>@parser</span><span class=o>.</span><span class=n>parse!</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=bp>__FILE__</span> <span class=o>==</span> <span class=vg>$PROGRAM_NAME</span>
+</span></span><span class=line><span class=cl>  <span class=n>run</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=script-usage-and-testing>Script usage and testing</h4><p><img src=aes.gif alt></p><hr><p>This blog post has been created for completing the requirements of the SecurityTube Linux Assembly Expert certification: <a href=http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/>http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/</a></p><p>Student ID: SLAE - 1558</p><hr><p><a href=https://github.com/jsnv-dev/slae_x86_assignments/tree/main/A7><code>Link to Github repository</code></a> | <a href=../slae_x86><code>Link to index page</code></a></p></div></article><div id=footer-post-container><div id=footer-post><div id=nav-footer style=display:none><ul><li><a href=/>~/</a></li><li><a href=/posts>~/posts</a></li><li><a href=/tags>~/tags</a></li><li><a href=/about>~/about</a></li><li><a href=/work>~/work</a></li></ul></div><div id=toc-footer style=display:none><nav id=TableOfContents><ul><li><a href=#objectives>Objectives</a></li><li><a href=#crypter>Crypter</a></li><li><a href=#advanced-encryption-standard-aes>Advanced Encryption Standard (AES)</a><ul><li><a href=#ruby-script>Ruby Script</a><ul><li><a href=#script-usage-and-testing>Script usage and testing</a></li></ul></li></ul></li></ul></nav></div><div id=share-footer style=display:none><ul><li><a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f" aria-label=Facebook><i class="fab fa-facebook fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://twitter.com/share?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&text=SLAE%20x86%20-%20Assignment%200x7" aria-label=Twitter><i class="fab fa-twitter fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=Linkedin><i class="fab fa-linkedin fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&is_video=false&description=SLAE%20x86%20-%20Assignment%200x7" aria-label=Pinterest><i class="fab fa-pinterest fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="mailto:?subject=SLAE%20x86%20-%20Assignment%200x7&body=Check out this article: https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f" aria-label=Email><i class="fas fa-envelope fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=Pocket><i class="fab fa-get-pocket fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&title=SLAE%20x86%20-%20Assignment%200x7" aria-label=reddit><i class="fab fa-reddit fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&name=SLAE%20x86%20-%20Assignment%200x7&description=Custom%20Shellcode%20Crypter%20Objectives%20Create%20a%20custom%20crypter%20Free%20to%20use%20any%20existing%20encryption%20schema%20Use%20any%20programming%20language%20Crypter%20Another%20process%20to%20conceal%20a%20shellcode%20by%20means%20of%20encrypting%20with%20different%20schema.%20%26ldquo%3bEncryption%20is%20the%20foundation%20of%20modern%20security.%26rdquo%3b%20as%20snowden%20mentioned.%20In%20case%20of%20exploit%20development%2c%20it%20is%20another%20technique%20such%20as%20Encoding%20%26amp%3b%20Polymorphism%20from%20previous%20assignments%20to%20make%20detection%20harder.%0aAdvanced%20Encryption%20Standard%20%28AES%29%20The%20AES%20is%20originally%20Rijndael%20cipher%2c%20the%20winner%20of%20the%20NIST%26rsquo%3bs%20AES%20selection%2c%20is%20widely%20used." aria-label=Tumblr><i class="fab fa-tumblr fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjsnv.dev%2fposts%2fslae_x86_a7%2f&t=SLAE%20x86%20-%20Assignment%200x7" aria-label="Hacker News"><i class="fab fa-hacker-news fa-lg" aria-hidden=true></i></a></li></ul></div><div id=actions-footer><a id=menu-toggle class=icon href=# onclick='return $("#nav-footer").toggle(),!1' aria-label=Menu><i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
+<a id=toc-toggle class=icon href=# onclick='return $("#toc-footer").toggle(),!1' aria-label=TOC><i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
+<a id=share-toggle class=icon href=# onclick='return $("#share-footer").toggle(),!1' aria-label=Share><i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
+<a id=top style=display:none class=icon href=# onclick='$("html, body").animate({scrollTop:0},"fast")' aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a></div></div></div><footer id=footer><div class=footer-left>Copyright &copy; 2022 jsn>
+<a class=icon target=_blank rel=noopener href=https://github.com/jsnv-dev aria-label=github><i class="fab fa-github" aria-hidden=true></i></a>
+<a class=icon target=_blank rel=noopener href=https://www.linkedin.com/in/jasonvillaluna aria-label=linkedin><i class="fab fa-linkedin" aria-hidden=true></i></a></div><div class=footer-right><nav><ul><li><a href=/>~/</a></li><li><a href=/posts>~/posts</a></li><li><a href=/tags>~/tags</a></li><li><a href=/about>~/about</a></li><li><a href=/work>~/work</a></li></ul></nav></div></footer></div></body><link rel=stylesheet href=/lib/font-awesome/css/all.min.css><script src=/lib/jquery/jquery.min.js></script>
 <script src=/js/main.js></script>
-<script src=/js/code-copy.js></script>
-</html>
+<script src=/js/code-copy.js></script></html>
