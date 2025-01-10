@@ -4,6 +4,16 @@
       "name":"SLAE x86 Codes",
       "url":"https://github.com/jsnv-dev/slae_x86_assignments/",
       "desc":"Codes created for completing the requirements of the SecurityTube Linux Assembly Expert certification"
+    },
+    {
+      "name":"Log4j RCE Vulnerability Standalone POC",
+      "url":"https://github.com/jsnv-dev/yet_another_log4j_POC_standalone",
+      "desc":"POC code for log4shell with full exploitation"
+    },
+    {
+      "name":"EvilGoPhish Docker",
+      "url":"https://github.com/jsnv-dev/evilgophish",
+      "desc":"Docker support for EvilGoPhish"
     }
   ]
 }
