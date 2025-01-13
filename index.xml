@@ -1,9 +1,223 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsn></title><link>https://jsnv.dev/</link><description>Recent content on jsn></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 23 Oct 2021 05:05:06 +0000</lastBuildDate><atom:link href="https://jsnv.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>SLAE x86 - Assignment 0x7</title><link>https://jsnv.dev/posts/slae_x86_a7/</link><pubDate>Sat, 23 Oct 2021 05:05:06 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a7/</guid><description>Custom Shellcode Crypter Objectives Create a custom crypter Free to use any existing encryption schema Use any programming language Crypter Another process to conceal a shellcode by means of encrypting with different schema. &amp;ldquo;Encryption is the foundation of modern security.&amp;rdquo; as snowden mentioned. In case of exploit development, it is another technique such as Encoding &amp;amp; Polymorphism from previous assignments to make detection harder.
-Advanced Encryption Standard (AES) The AES is originally Rijndael cipher, the winner of the NIST&amp;rsquo;s AES selection, is widely used.</description></item><item><title>SLAE x86 - Assignment 0x6</title><link>https://jsnv.dev/posts/slae_x86_a6/</link><pubDate>Sat, 23 Oct 2021 03:59:19 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a6/</guid><description>Shellcode Polymorphism Objectives Take up 3 shellcodes from shell-storm and create polymorphic versions of them to beat pattern matching The polymorphic versions cannot be larger 150% of the existing shellcode Bonus points for making it shorter in length than original Polymorphism It is a &amp;ldquo;concept borrowed from a principle in biology where an organism or species can have many different forms or stages&amp;rdquo; as mentioned in this Wikipedia Article. It&amp;rsquo;s use case in exploit development is the almost the same with Shellcode Encoding assignment and as mentioned in the objectives, to beat pattern matching.</description></item><item><title>SLAE x86 - Assignment 0x5</title><link>https://jsnv.dev/posts/slae_x86_a5/</link><pubDate>Sat, 23 Oct 2021 01:10:31 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a5/</guid><description>Shellcode Analysis Objectives Take up at least 3 shellcode samples created using msfpayload for linux/x86 Use GDB/ndisasm/libemu to dissect the functionality of the shellcode Present analysis MSFvenom The msfpayload has been replaced already by msfvenom. It is the combination of msfpayload and msfencode. See more details from Rapid7&amp;rsquo;s blog
-MSF Exec Shellcode Using msfvenom, a shellcode utilizing execve syscall to execute /bin/sh can be generated. See screenshot below showing how to extract the nasm code by passing the shellcode into ndisasm tool:</description></item><item><title>SLAE x86 - Assignment 0x4</title><link>https://jsnv.dev/posts/slae_x86_a4/</link><pubDate>Fri, 22 Oct 2021 09:14:40 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a4/</guid><description>Custom Shellcode Encoder Objectives Create a custom encoding scheme PoC using execve-stack as the shellcode to encode with the schema and execute Overview Shellcode encoding is used to make a shellcode looks gibberish or mask the original functionality. One use-case is evading antivirus or related products. During the execution of the shellcode, the first part of it will decode the encoded part of the main shellcode then execute once done.</description></item><item><title>SLAE x86 - Assignment 0x3</title><link>https://jsnv.dev/posts/slae_x86_a3/</link><pubDate>Wed, 20 Oct 2021 08:27:30 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a3/</guid><description>Egg Hunter Shellcode Objectives Study about egg hunter shellcode Create a working demo of the egg hunter Should be configurable of different payloads Overview Egg hunter shellcode is a helper shellcode that will scan the memory pages to search for a predefined pattern called egg. The egg is appended in the main shellcode that will be executed during the exploitation. It is useful when there&amp;rsquo;s a limited shellcode size for a vulnerable application&amp;rsquo;s input.</description></item><item><title>SLAE x86 - Assignment 0x2</title><link>https://jsnv.dev/posts/slae_x86_a2/</link><pubDate>Wed, 20 Oct 2021 06:38:37 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a2/</guid><description>Reverse TCP Shellcode Objectives Create a shell reverse tcp shellcode Reverse connects to configured IP and port Execs shell on successful connection IP and port should be easily configurable Structure Using reverse shell from msfvenom, the needed syscalls can be visualize with the help of libemu's sctest and dot tool:
-Generated using:
-msfvenom --arch x86 --platform linux -p linux/x86/shell_reverse_tcp -f raw | sctest -vvv -Ss 10000 -G reverse_tcp_shellcode.dot dot reverse_tcp_shellcode.dot -T png -o reverse_tcp_shellcode.</description></item><item><title>SLAE x86 - Assignment 0x1</title><link>https://jsnv.dev/posts/slae_x86_a1/</link><pubDate>Mon, 18 Oct 2021 05:50:49 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a1/</guid><description>Bind TCP Shellcode Objectives Create a shell bind tcp shellcode Binds to a port Execs shell on incoming connection Port number should be easily configurable Structure Using bind shell from msfvenom, the needed syscalls can be visualize with the help of libemu's sctest and dot tool:
-Generated using:
-msfvenom --arch x86 --platform linux -p linux/x86/shell_bind_tcp -f raw | sctest -vvv -Ss 10000 -G bind_tcp_shellcode.dot dot bind_tcp_shellcode.dot -T png -o bind_tcp_shellcode.png Creating the NASM Code Syscalls and other values Below are the needed syscalls and respective opcodes from /usr/include/asm/unistd_32.</description></item><item><title>SLAE x86 - Assignments</title><link>https://jsnv.dev/posts/slae_x86/</link><pubDate>Mon, 18 Oct 2021 05:49:49 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86/</guid><description>SecurityTube Linux Assembly Expert x86 Assignments Bind TCP Shellcode Create a shell bind tcp shellcode Binds to a port Execs shell on incoming connection Port number should be easily configurable Reverse TCP Shellcode Create a shell reverse tcp shellcode Reverse connects to configured IP and port Execs shell on successful connection IP and port should be easily configurable Egg Hunter Shellcode Study about egg hunter shellcode Create a working demo of the egg hunter Should be configurable of different payloads Custom Shellcode Encoder Create a custom encoding scheme PoC using execve-stack as the shellcode to encode with the schema and execute Shellcode Analysis Take up at least 3 shellcode samples created using msfpayload for linux/x86 Use GDB/ndisasm/libemu to dissect the functionality of the shellcode Present analysis Shellcode Polymorphism Take up 3 shellcodes from shell-storm and create polymorphic versions of them to beat pattern matching The polymorphic versions cannot be larger 150% of the existing shellcode Bonus points for making it shorter in length than original Custom Shellcode Crypter Create a custom crypter Free to use any existing encryption schema Use any programming language</description></item><item><title>Work</title><link>https://jsnv.dev/work/</link><pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate><guid>https://jsnv.dev/work/</guid><description>Senior Security Researcher at Trustwave's SpiderLabs
-Blog posts: 2022 Trustwave SpiderLabs Telemetry Report 2021 Trustwave SpiderLabs Telemetry Report Finds That Organizations Are Slow to Patch Even High-Profile Vulnerabilities Thousands of Vulnerable VMWare vCenter Servers Still Publicly Exposed Hijacking a Domain Controller with Netlogon RPC Previous: Security Incident Handler at Access Now
-Blog post: New Facebook phishing attack taking Vietnamese opposition voices offline</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsn></title><link>https://jsnv.dev/</link><description>Recent content on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 23 Oct 2021 05:05:06 +0000</lastBuildDate><atom:link href="https://jsnv.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>SLAE x86 - Assignment 0x7</title><link>https://jsnv.dev/posts/slae_x86_a7/</link><pubDate>Sat, 23 Oct 2021 05:05:06 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a7/</guid><description>&lt;h1 id="custom-shellcode-crypter">Custom Shellcode Crypter&lt;/h1>
+&lt;h2 id="objectives">Objectives&lt;/h2>
+&lt;ul>
+&lt;li>Create a custom crypter&lt;/li>
+&lt;li>Free to use any existing encryption schema&lt;/li>
+&lt;li>Use any programming language&lt;/li>
+&lt;/ul>
+&lt;h2 id="crypter">Crypter&lt;/h2>
+&lt;p>Another process to conceal a shellcode by means of encrypting with different schema. &lt;em>&amp;ldquo;Encryption is the foundation of modern security.&amp;rdquo;&lt;/em> as &lt;a href="https://twitter.com/Snowden/status/1451205615838183426">snowden mentioned&lt;/a>. In case of exploit development, it is another technique such as &lt;a href="../slae_x86_a4">Encoding&lt;/a> &amp;amp; &lt;a href="../slae_x86_a6">Polymorphism&lt;/a> from previous assignments to make detection harder.&lt;/p>
+&lt;h2 id="advanced-encryption-standard-aes">Advanced Encryption Standard (AES)&lt;/h2>
+&lt;p>The AES is originally Rijndael cipher, the winner of the NIST&amp;rsquo;s AES selection, is widely used. It can be implemented with 128, 192, or 256 bits of key.
+The algorithm consist of several steps: sub bytes, shift rows, mix columns, &amp;amp; add round key. More details of the process here: &lt;a href="https://formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng-html5.html">https://formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng-html5.html&lt;/a>.&lt;/p></description></item><item><title>SLAE x86 - Assignment 0x6</title><link>https://jsnv.dev/posts/slae_x86_a6/</link><pubDate>Sat, 23 Oct 2021 03:59:19 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a6/</guid><description>&lt;h1 id="shellcode-polymorphism">Shellcode Polymorphism&lt;/h1>
+&lt;h2 id="objectives">Objectives&lt;/h2>
+&lt;ul>
+&lt;li>Take up 3 shellcodes from shell-storm and create polymorphic versions of them to beat pattern matching
+&lt;ul>
+&lt;li>The polymorphic versions cannot be larger 150% of the existing shellcode&lt;/li>
+&lt;li>Bonus points for making it shorter in length than original&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="polymorphism">Polymorphism&lt;/h2>
+&lt;p>It is a &lt;em>&amp;ldquo;concept borrowed from a principle in biology where an organism or species can have many different forms or stages&amp;rdquo;&lt;/em> as mentioned in &lt;a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">&lt;code>this Wikipedia Article&lt;/code>&lt;/a>. It&amp;rsquo;s use case in exploit development is the almost the same with &lt;a href="../slae_x86_a4#overview">&lt;code>Shellcode Encoding assignment&lt;/code>&lt;/a> and as mentioned in the &lt;a href="#objectives">objectives&lt;/a>, to beat pattern matching. In simple way, the current code is modified to be look like gibberish but still getting the end result as the original code. Also, adding extra instructions like &lt;code>nops&lt;/code> or other that will not affect the outcome to make the shellcode look different from existing signatures of endpoint protection products.&lt;/p></description></item><item><title>SLAE x86 - Assignment 0x5</title><link>https://jsnv.dev/posts/slae_x86_a5/</link><pubDate>Sat, 23 Oct 2021 01:10:31 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a5/</guid><description>&lt;h1 id="shellcode-analysis">Shellcode Analysis&lt;/h1>
+&lt;h2 id="objectives">Objectives&lt;/h2>
+&lt;ul>
+&lt;li>Take up at least 3 shellcode samples created using msfpayload for linux/x86&lt;/li>
+&lt;li>Use GDB/ndisasm/libemu to dissect the functionality of the shellcode&lt;/li>
+&lt;li>Present analysis&lt;/li>
+&lt;/ul>
+&lt;h2 id="msfvenom">MSFvenom&lt;/h2>
+&lt;p>The &lt;a href="https://www.offensive-security.com/metasploit-unleashed/msfpayload/">msfpayload&lt;/a> has been replaced already by &lt;a href="https://www.offensive-security.com/metasploit-unleashed/msfvenom/">msfvenom&lt;/a>. It is the combination of msfpayload and &lt;a href="https://www.offensive-security.com/metasploit-unleashed/msfencode/">msfencode&lt;/a>. See more details from &lt;a href="https://www.rapid7.com/blog/post/2014/12/09/good-bye-msfpayload-and-msfencode/">Rapid7&amp;rsquo;s blog&lt;/a>&lt;/p>
+&lt;h2 id="msf-exec-shellcode">MSF Exec Shellcode&lt;/h2>
+&lt;p>Using &lt;a href="#msfvenom">msfvenom&lt;/a>, a shellcode utilizing &lt;code>execve&lt;/code> syscall to execute &lt;code>/bin/sh&lt;/code> can be generated. See screenshot below showing how to extract the nasm code by passing the shellcode into &lt;code>ndisasm&lt;/code> tool:&lt;/p></description></item><item><title>SLAE x86 - Assignment 0x4</title><link>https://jsnv.dev/posts/slae_x86_a4/</link><pubDate>Fri, 22 Oct 2021 09:14:40 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a4/</guid><description>&lt;h1 id="custom-shellcode-encoder">Custom Shellcode Encoder&lt;/h1>
+&lt;h2 id="objectives">Objectives&lt;/h2>
+&lt;ul>
+&lt;li>Create a custom encoding scheme&lt;/li>
+&lt;li>PoC using execve-stack as the shellcode to encode with the schema and execute&lt;/li>
+&lt;/ul>
+&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>Shellcode encoding is used to make a shellcode looks gibberish or mask the original functionality. One use-case is evading antivirus or related products. During the execution of the shellcode, the first part of it will decode the encoded part of the main shellcode then execute once done.&lt;/p></description></item><item><title>SLAE x86 - Assignment 0x3</title><link>https://jsnv.dev/posts/slae_x86_a3/</link><pubDate>Wed, 20 Oct 2021 08:27:30 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a3/</guid><description>&lt;h1 id="egg-hunter-shellcode">Egg Hunter Shellcode&lt;/h1>
+&lt;h2 id="objectives">Objectives&lt;/h2>
+&lt;ul>
+&lt;li>Study about egg hunter shellcode&lt;/li>
+&lt;li>Create a working demo of the egg hunter
+&lt;ul>
+&lt;li>Should be configurable of different payloads&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>Egg hunter shellcode is a helper shellcode that will scan the memory pages to search for a predefined pattern called &lt;code>egg&lt;/code>.
+The egg is appended in the main shellcode that will be executed during the exploitation.
+It is useful when there&amp;rsquo;s a limited shellcode size for a vulnerable application&amp;rsquo;s input.
+The egg hunter shellcode can then be used as an alternative since it is small, but the main shellcode should be put in other inputs to find it in the memory.
+This &lt;a href="http://www.hick.org/code/skape/papers/egghunt-shellcode.pdf">&lt;code>research paper&lt;/code>&lt;/a> presented several implementations for both Linux and Windows&lt;/p></description></item><item><title>SLAE x86 - Assignment 0x2</title><link>https://jsnv.dev/posts/slae_x86_a2/</link><pubDate>Wed, 20 Oct 2021 06:38:37 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a2/</guid><description>&lt;h1 id="reverse-tcp-shellcode">Reverse TCP Shellcode&lt;/h1>
+&lt;h2 id="objectives">Objectives&lt;/h2>
+&lt;ul>
+&lt;li>Create a shell reverse tcp shellcode
+&lt;ul>
+&lt;li>Reverse connects to configured IP and port&lt;/li>
+&lt;li>Execs shell on successful connection&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>IP and port should be easily configurable&lt;/li>
+&lt;/ul>
+&lt;h2 id="structure">Structure&lt;/h2>
+&lt;p>Using reverse shell from msfvenom, the needed syscalls can be visualize with the help of &lt;a href="https://github.com/buffer/libemu">&lt;code>libemu's sctest&lt;/code>&lt;/a> and &lt;a href="https://graphviz.org/">&lt;code>dot tool&lt;/code>&lt;/a>:&lt;/p>
+&lt;p>&lt;img src="reverse_tcp_shellcode.png" alt="">&lt;/p>
+&lt;p>Generated using:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">msfvenom --arch x86 --platform linux -p linux/x86/shell_reverse_tcp -f raw &lt;span class="p">|&lt;/span> sctest -vvv -Ss &lt;span class="m">10000&lt;/span> -G reverse_tcp_shellcode.dot
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dot reverse_tcp_shellcode.dot -T png -o reverse_tcp_shellcode.png
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="creating-the-nasm-code">Creating the NASM Code&lt;/h2>
+&lt;h3 id="syscalls-and-other-values">Syscalls and other values&lt;/h3>
+&lt;ul>
+&lt;li>Below are the needed syscalls and respective opcodes from &lt;code>/usr/include/asm/unistd_32.h&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-nasm" data-lang="nasm">&lt;span class="line">&lt;span class="cl"> &lt;span class="no">SOCKET&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x167&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">CONNECT&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x16a&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">DUP&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x3f&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">EXECVE&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0xb&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>These are declared under &lt;code>section .text&lt;/code> for better reading of the nasm code together with other constants:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-nasm" data-lang="nasm">&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">; settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">PORT&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0xd204&lt;/span> &lt;span class="c1">; default 1234&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">XOR_IP&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0xfeffff80&lt;/span> &lt;span class="c1">; default (127.0.0.1 XORed with 0xffffffff)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">; this is to avoid null in shellcode&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">; argument constants&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">AF_INET&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">SOCK_STREAM&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="socket2">Socket(2)&lt;/h3>
+&lt;ul>
+&lt;li>This will create an endpoint for communication and returns a file descriptor that refers the endpoint.
+The usage are detailed in: &lt;a href="https://man7.org/linux/man-pages/man2/socket.2.html">https://man7.org/linux/man-pages/man2/socket.2.html&lt;/a>&lt;/li>
+&lt;li>Synopsis: &lt;code>socket(int domain, int type, int protocol)&lt;/code>&lt;/li>
+&lt;li>Syscall arguments:
+&lt;ul>
+&lt;li>ebx: AF_INET = 2&lt;/li>
+&lt;li>ecx: SOCK_STREAM = 1&lt;/li>
+&lt;li>edx: IPPROTO_IP = 6&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>NASM Code:&lt;/p></description></item><item><title>SLAE x86 - Assignment 0x1</title><link>https://jsnv.dev/posts/slae_x86_a1/</link><pubDate>Mon, 18 Oct 2021 05:50:49 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a1/</guid><description>&lt;h1 id="bind-tcp-shellcode">Bind TCP Shellcode&lt;/h1>
+&lt;h2 id="objectives">Objectives&lt;/h2>
+&lt;ul>
+&lt;li>Create a shell bind tcp shellcode
+&lt;ul>
+&lt;li>Binds	to a port&lt;/li>
+&lt;li>Execs	shell	on incoming	connection&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Port number should be easily configurable&lt;/li>
+&lt;/ul>
+&lt;h2 id="structure">Structure&lt;/h2>
+&lt;p>Using bind shell from msfvenom, the needed syscalls can be visualize with the help of &lt;a href="https://github.com/buffer/libemu">&lt;code>libemu's sctest&lt;/code>&lt;/a> and &lt;a href="https://graphviz.org/">&lt;code>dot tool&lt;/code>&lt;/a>:&lt;/p>
+&lt;p>&lt;img src="bind_tcp_shellcode.png" alt="">&lt;/p>
+&lt;p>Generated using:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">msfvenom --arch x86 --platform linux -p linux/x86/shell_bind_tcp -f raw &lt;span class="p">|&lt;/span> sctest -vvv -Ss &lt;span class="m">10000&lt;/span> -G bind_tcp_shellcode.dot
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dot bind_tcp_shellcode.dot -T png -o bind_tcp_shellcode.png
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="creating-the-nasm-code">Creating the NASM Code&lt;/h2>
+&lt;h3 id="syscalls-and-other-values">Syscalls and other values&lt;/h3>
+&lt;ul>
+&lt;li>Below are the needed syscalls and respective opcodes from &lt;code>/usr/include/asm/unistd_32.h&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-nasm" data-lang="nasm">&lt;span class="line">&lt;span class="cl"> &lt;span class="no">SOCKET&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x167&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">BIND&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x169&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">LISTEN&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x16b&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">ACCEPT&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x16c&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">DUP&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x3f&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">EXECVE&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0xb&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>These are declared under &lt;code>section .text&lt;/code> for better reading of the nasm code together with other constants:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-nasm" data-lang="nasm">&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">; settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">PORT&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0xd204&lt;/span> &lt;span class="c1">; default 1234&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">; argument constants&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">AF_INET&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="no">SOCK_STREAM&lt;/span>&lt;span class="kd"> equ&lt;/span> &lt;span class="mh">0x1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="socket2">Socket(2)&lt;/h3>
+&lt;ul>
+&lt;li>This will create an endpoint for communication and returns a file descriptor that refers the endpoint.
+The usage are detailed in: &lt;a href="https://man7.org/linux/man-pages/man2/socket.2.html">https://man7.org/linux/man-pages/man2/socket.2.html&lt;/a>&lt;/li>
+&lt;li>Synopsis: &lt;code>socket(int domain, int type, int protocol)&lt;/code>&lt;/li>
+&lt;li>Syscall arguments:
+&lt;ul>
+&lt;li>ebx: AF_INET = 2&lt;/li>
+&lt;li>ecx: SOCK_STREAM = 1&lt;/li>
+&lt;li>edx: IPPROTO_IP = 6&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>NASM Code:&lt;/p></description></item><item><title>SLAE x86 - Assignments</title><link>https://jsnv.dev/posts/slae_x86/</link><pubDate>Mon, 18 Oct 2021 05:49:49 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86/</guid><description>&lt;h1 id="securitytube-linux-assembly-expert-x86-assignmentshttpswwwpentesteracademycomcourseid3">&lt;a href="https://www.pentesteracademy.com/course?id=3">SecurityTube Linux Assembly Expert x86 Assignments&lt;/a>&lt;/h1>
+&lt;h2 id="bind-tcp-shellcodeslae_x86_a1">&lt;a href="../slae_x86_a1">Bind TCP Shellcode&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Create a shell bind tcp shellcode
+&lt;ul>
+&lt;li>Binds	to a port&lt;/li>
+&lt;li>Execs	shell	on incoming	connection&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Port number should be easily configurable&lt;/li>
+&lt;/ul>
+&lt;h2 id="reverse-tcp-shellcodeslae_x86_a2">&lt;a href="../slae_x86_a2">Reverse TCP Shellcode&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Create a shell reverse tcp shellcode
+&lt;ul>
+&lt;li>Reverse connects to configured IP and port&lt;/li>
+&lt;li>Execs shell on successful connection&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>IP and port should be easily configurable&lt;/li>
+&lt;/ul>
+&lt;h2 id="egg-hunter-shellcodeslae_x86_a3">&lt;a href="../slae_x86_a3">Egg Hunter Shellcode&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Study about egg hunter shellcode&lt;/li>
+&lt;li>Create a working demo of the egg hunter
+&lt;ul>
+&lt;li>Should be configurable of different payloads&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="custom-shellcode-encoderslae_x86_a4">&lt;a href="../slae_x86_a4">Custom Shellcode Encoder&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Create a custom encoding scheme&lt;/li>
+&lt;li>PoC using execve-stack as the shellcode to encode with the schema and execute&lt;/li>
+&lt;/ul>
+&lt;h2 id="shellcode-analysisslae_x86_a5">&lt;a href="../slae_x86_a5">Shellcode Analysis&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Take up at least 3 shellcode samples created using msfpayload for linux/x86&lt;/li>
+&lt;li>Use GDB/ndisasm/libemu to dissect the functionality of the shellcode&lt;/li>
+&lt;li>Present analysis&lt;/li>
+&lt;/ul>
+&lt;h2 id="shellcode-polymorphismslae_x86_a6">&lt;a href="../slae_x86_a6">Shellcode Polymorphism&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Take up 3 shellcodes from shell-storm and create polymorphic versions of them to beat pattern matching
+&lt;ul>
+&lt;li>The polymorphic versions cannot be larger 150% of the existing shellcode&lt;/li>
+&lt;li>Bonus points for making it shorter in length than original&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="custom-shellcode-crypterslae_x86_a7">&lt;a href="../slae_x86_a7">Custom Shellcode Crypter&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Create a custom crypter&lt;/li>
+&lt;li>Free to use any existing encryption schema&lt;/li>
+&lt;li>Use any programming language&lt;/li>
+&lt;/ul></description></item><item><title>Work</title><link>https://jsnv.dev/work/</link><pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate><guid>https://jsnv.dev/work/</guid><description>&lt;p>&lt;a href="https://web.archive.org/web/20210126122442/https://www.trustwave.com/en-us/resources/authors/jason-villaluna/">Senior Security Researcher&lt;/a> at &lt;a href="https://www.trustwave.com/en-us/company/about-us/spiderlabs/">&lt;code>Trustwave's SpiderLabs&lt;/code>&lt;/a>&lt;/p>
+&lt;h3 id="blog-posts">Blog posts:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/2022-trustwave-spiderlabs-telemetry-report/">2022 Trustwave SpiderLabs Telemetry Report&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.trustwave.com/en-us/resources/blogs/trustwave-blog/2021-trustwave-spiderlabs-telemetry-report-finds-that-organizations-are-slow-to-patch-even-high-profile-vulnerabilities/">2021 Trustwave SpiderLabs Telemetry Report Finds That Organizations Are Slow to Patch Even High-Profile Vulnerabilities&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/thousands-of-vulnerable-vmware-vcenter-servers-still-publicly-exposed-cve-2021-21985-cve-2021-21986/">Thousands of Vulnerable VMWare vCenter Servers Still Publicly Exposed&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/hijacking-a-domain-controller-with-netlogon-rpc-aka-zerologon-cve-2020-1472/">Hijacking a Domain Controller with Netlogon RPC&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>Previous: &lt;a href="https://web.archive.org/web/20200219230442/https://www.accessnow.org/profile/jason-villaluna/">Security Incident Handler&lt;/a> at &lt;a href="https://www.accessnow.org">&lt;code>Access Now&lt;/code>&lt;/a>&lt;/p>
+&lt;h3 id="blog-post">Blog post:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.accessnow.org/vietnam-facebook-phishing-attack-take-opposition-voices-offline/">New Facebook phishing attack taking Vietnamese opposition voices offline&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
