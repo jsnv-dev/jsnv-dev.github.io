@@ -14,7 +14,7 @@ keywords:
 
 # Lessons from Richard Hamming
 
-In his 1986 talk ["You and Your Research,"](https://youtu.be/a1zDuOPkMSw) renowned mathematician Richard Hamming provided a blueprint for achieving scientific excellence. His message was revolutionary: greatness isn't reserved for geniuses. Instead, it comes from deliberate preparation, consistent effort, and the courage to tackle significant problems. "If others would think as hard as I did," he quoted Newton, "they would get similar results."
+In his 1986 talk ["You and Your Research,"](https://www.cs.virginia.edu/~robins/YouAndYourResearch.html) renowned mathematician Richard Hamming provided a blueprint for achieving scientific excellence. His message was revolutionary: greatness isn't reserved for geniuses. Instead, it comes from deliberate preparation, consistent effort, and the courage to tackle significant problems. "If others would think as hard as I did," he quoted Newton, "they would get similar results."
 
 ## The Foundation: Preparation and Courage
 
