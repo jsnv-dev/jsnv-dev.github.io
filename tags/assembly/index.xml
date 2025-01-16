@@ -1,4 +1,73 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Assembly on jsn></title><link>https://jsnv.dev/tags/assembly/</link><description>Recent content in Assembly on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 23 Oct 2021 05:05:06 +0000</lastBuildDate><atom:link href="https://jsnv.dev/tags/assembly/index.xml" rel="self" type="application/rss+xml"/><item><title>SLAE x86 - Assignment 0x7</title><link>https://jsnv.dev/posts/slae_x86_a7/</link><pubDate>Sat, 23 Oct 2021 05:05:06 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a7/</guid><description>&lt;h1 id="custom-shellcode-crypter">Custom Shellcode Crypter&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Assembly on jsn></title><link>https://jsnv.dev/tags/assembly/</link><description>Recent content in Assembly on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 16 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/tags/assembly/index.xml" rel="self" type="application/rss+xml"/><item><title>GDB Refresher</title><link>https://jsnv.dev/posts/gdb_refresher/</link><pubDate>Thu, 16 Jan 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/gdb_refresher/</guid><description>&lt;h1 id="gdb-refresher">GDB Refresher&lt;/h1>
+&lt;p>This cheatsheet provides a concise summary of the key GDB commands and concepts discussed in &lt;a href="https://www.youtube.com/watch?v=r185fCzdw8Y&amp;amp;list=PL-ymxv0nOtqqQzEncNuE6jetlJAiBUda-">&lt;code>Debugging Refresher&lt;/code>&lt;/a> tutorial. It covers basic commands, memory examination, variable manipulation, disassembly, breakpoint management, scripting, configuration, and tips for using GDB.&lt;/p>
+&lt;h2 id="basic-commands">Basic Commands&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>gdb &amp;lt;program&amp;gt;&lt;/code>: Start GDB with a program&lt;/li>
+&lt;li>&lt;code>run [args]&lt;/code>: Run the program (with optional arguments)&lt;/li>
+&lt;li>&lt;code>break &amp;lt;function/line&amp;gt;&lt;/code>: Set a breakpoint&lt;/li>
+&lt;li>&lt;code>continue&lt;/code> or &lt;code>c&lt;/code>: Continue execution&lt;/li>
+&lt;li>&lt;code>next&lt;/code> or &lt;code>n&lt;/code>: Step over&lt;/li>
+&lt;li>&lt;code>step&lt;/code> or &lt;code>s&lt;/code>: Step into&lt;/li>
+&lt;li>&lt;code>finish&lt;/code>: Run until the current function returns&lt;/li>
+&lt;li>&lt;code>print &amp;lt;expr&amp;gt;&lt;/code> or &lt;code>p &amp;lt;expr&amp;gt;&lt;/code>: Print value of expression&lt;/li>
+&lt;li>&lt;code>display &amp;lt;expr&amp;gt;&lt;/code>: Display expression value after each step&lt;/li>
+&lt;li>&lt;code>info break&lt;/code>: List breakpoints&lt;/li>
+&lt;li>&lt;code>delete &amp;lt;breakpoint-num&amp;gt;&lt;/code>: Delete a breakpoint&lt;/li>
+&lt;li>&lt;code>quit&lt;/code> or &lt;code>q&lt;/code>: Exit GDB&lt;/li>
+&lt;/ul>
+&lt;h2 id="examining-memory-and-registers">Examining Memory and Registers&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>info registers&lt;/code> or &lt;code>info reg&lt;/code>: Show register values&lt;/li>
+&lt;li>&lt;code>print $&amp;lt;register&amp;gt;&lt;/code>: Print specific register value (e.g., &lt;code>print $rax&lt;/code>)&lt;/li>
+&lt;li>&lt;code>x/&amp;lt;format&amp;gt; &amp;lt;address&amp;gt;&lt;/code>: Examine memory
+&lt;ul>
+&lt;li>Formats: &lt;code>x&lt;/code> (hex), &lt;code>d&lt;/code> (decimal), &lt;code>u&lt;/code> (unsigned decimal), &lt;code>o&lt;/code> (octal), &lt;code>t&lt;/code> (binary), &lt;code>a&lt;/code> (address), &lt;code>i&lt;/code> (instruction), &lt;code>c&lt;/code> (char), &lt;code>s&lt;/code> (string)&lt;/li>
+&lt;li>Example: &lt;code>x/10i $rip&lt;/code> (examine 10 instructions at current instruction pointer)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="variables-and-memory-manipulation">Variables and Memory Manipulation&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>set &amp;lt;variable&amp;gt; = &amp;lt;value&amp;gt;&lt;/code>: Set a variable&amp;rsquo;s value&lt;/li>
+&lt;li>&lt;code>set $&amp;lt;register&amp;gt; = &amp;lt;value&amp;gt;&lt;/code>: Set a register&amp;rsquo;s value&lt;/li>
+&lt;li>&lt;code>set {&amp;lt;type&amp;gt;}&amp;lt;address&amp;gt; = &amp;lt;value&amp;gt;&lt;/code>: Set memory at address&lt;/li>
+&lt;/ul>
+&lt;h2 id="disassembly">Disassembly&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>disassemble &amp;lt;function&amp;gt;&lt;/code>: Disassemble a function&lt;/li>
+&lt;li>&lt;code>disassemble &amp;lt;address&amp;gt;&lt;/code>: Disassemble at an address&lt;/li>
+&lt;/ul>
+&lt;h2 id="breakpoint-commands">Breakpoint Commands&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>commands &amp;lt;breakpoint-num&amp;gt;&lt;/code>: Specify commands to run when breakpoint is hit&lt;/li>
+&lt;li>&lt;code>silent&lt;/code>: Make breakpoint silent (use within &lt;code>commands&lt;/code>)&lt;/li>
+&lt;li>&lt;code>end&lt;/code>: End list of commands for a breakpoint&lt;/li>
+&lt;/ul>
+&lt;h2 id="scripting">Scripting&lt;/h2>
+&lt;ul>
+&lt;li>Create a file with GDB commands (e.g., &lt;code>myscript.gdb&lt;/code>)&lt;/li>
+&lt;li>Run with: &lt;code>gdb -x myscript.gdb &amp;lt;program&amp;gt;&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;ul>
+&lt;li>Create &lt;code>~/.gdbinit&lt;/code> for persistent configurations&lt;/li>
+&lt;li>&lt;code>set disassembly-flavor intel&lt;/code>: Set to Intel syntax (add to &lt;code>.gdbinit&lt;/code> for persistence)&lt;/li>
+&lt;/ul>
+&lt;h2 id="plugins">Plugins&lt;/h2>
+&lt;ul>
+&lt;li>GEF (GDB Enhanced Features): Provides richer output and additional commands&lt;/li>
+&lt;li>Enable in &lt;code>.gdbinit&lt;/code> with: &lt;code>source /path/to/gef.py&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="tips">Tips&lt;/h2>
+&lt;ul>
+&lt;li>Use &lt;code>$_&lt;/code> to reference the last value printed&lt;/li>
+&lt;li>Variables printed are stored as &lt;code>$1&lt;/code>, &lt;code>$2&lt;/code>, etc., for later reference&lt;/li>
+&lt;li>Use &lt;code>set pagination off&lt;/code> to disable paging for long outputs&lt;/li>
+&lt;/ul>
+&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>Debugging Refresher - Robert - GDB Demo - 2022.09.16: &lt;a href="https://www.youtube.com/watch?v=r185fCzdw8Y&amp;amp;list=PL-ymxv0nOtqqQzEncNuE6jetlJAiBUda-">https://www.youtube.com/watch?v=r185fCzdw8Y&amp;amp;list=PL-ymxv0nOtqqQzEncNuE6jetlJAiBUda-&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>SLAE x86 - Assignment 0x7</title><link>https://jsnv.dev/posts/slae_x86_a7/</link><pubDate>Sat, 23 Oct 2021 05:05:06 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86_a7/</guid><description>&lt;h1 id="custom-shellcode-crypter">Custom Shellcode Crypter&lt;/h1>
 &lt;h2 id="objectives">Objectives&lt;/h2>
 &lt;ul>
 &lt;li>Create a custom crypter&lt;/li>
