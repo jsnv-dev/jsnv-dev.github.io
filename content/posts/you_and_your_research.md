@@ -125,31 +125,39 @@ Hamming's insights are often best captured in his own words. Here are some of hi
 
 On Reading and Active Learning:
 > "If you read all the time what other people have done you will think the way they thought."
+> 
 > "You need to keep up more to find out what the problems are than to read to find the solutions."
+> 
 > "There was a fellow at Bell Labs... he was always in the library; he read everything... but there's no effect named after him because he read too much."
 
 On Luck and Preparation:
 > "The particular thing you do is luck, but that you do something is not."
+> 
 > "Luck favors the prepared mind."
 
 On Knowledge and Work:
 > "Knowledge and productivity are like compound interest."
+> 
 > "It is a poor workman who blames his tools - the good man gets on with the job, given what he's got, and gets the best answer he can."
 
 On Choosing Problems:
 > "If you do not work on an important problem, it's unlikely you'll do important work."
+> 
 > "Great scientists have thought through, in a careful way, a number of important problems in their field, and they keep an eye on wondering how to attack them."
 
 On Openness and Collaboration:
 > "The closed door is symbolic of a closed mind."
+> 
 > "I notice that if you have the door to your office closed, you get more work done today and tomorrow, and you are more productive than most. But ten years later somehow you don't quite know what problems are worth working on."
 
 On Life Choices:
 > "You have one life to live—why shouldn't you do significant things in this one life?"
+> 
 > "The struggle to make something of yourself seems to be worthwhile in itself."
 
 On Personal Growth:
 > "You need to know yourself, your weaknesses, your strengths, and your bad faults... How can you convert a fault to an asset?"
+> 
 > "If you want to be a great researcher, you won't make it being president of the company. You have to be clear on what you want."
 
 ## Conclusion
