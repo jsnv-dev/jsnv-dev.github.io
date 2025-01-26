@@ -1,0 +1,524 @@
+<!doctype html><html lang=en-us><head><link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous><script type=text/javascript src=../../static/js/cactus.js></script><link rel=stylesheet href=../../static/css/style.css type=text/css><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>Go Programming Notes | jsn></title>
+<link rel=canonical href=https://jsnv.dev/posts/go_programming_notes/><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="all,follow"><meta name=googlebot content="index,follow,snippet,archive"><meta property="og:url" content="https://jsnv.dev/posts/go_programming_notes/"><meta property="og:site_name" content="jsn>"><meta property="og:title" content="Go Programming Notes"><meta property="og:description" content='Go Programming Notes These are my notes from the Go: The Complete Developer&#39;s Guide (Golang) course. You can find the actual codes at my GitHub repo.
+Getting Started with Go Five Important Questions Even a simple Go program reveals five fundamental aspects of the language:
+1 2 3 4 5 6 7 package main import "fmt" func main() { fmt.Println("Hi there") } Looking at this program raises five essential questions that form the foundation of understanding Go:'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-01-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-01-26T00:00:00+00:00"><meta property="article:tag" content="Programming"><meta property="article:tag" content="Learning"><meta name=twitter:card content="summary"><meta name=twitter:title content="Go Programming Notes"><meta name=twitter:description content='Go Programming Notes These are my notes from the Go: The Complete Developer&#39;s Guide (Golang) course. You can find the actual codes at my GitHub repo.
+Getting Started with Go Five Important Questions Even a simple Go program reveals five fundamental aspects of the language:
+1 2 3 4 5 6 7 package main import "fmt" func main() { fmt.Println("Hi there") } Looking at this program raises five essential questions that form the foundation of understanding Go:'><link rel=stylesheet href=https://jsnv.dev/css/styles.e0c78cbd30ccf830ab3999067c1a901c504a80448cc0192be113d008ec8bc141cfb7761248cf6ee58d860a9439f4079c122ff7e221d6874440f2b55cc9f935db.css integrity="sha512-4MeMvTDM+DCrOZkGfBqQHFBKgESMwBkr4RPQCOyLwUHPt3YSSM9u5Y2GCpQ59AecEi/34iHWh0RA8rVcyfk12w=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script><script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]--><link rel=icon type=image/png href=https://jsnv.dev/images/favicon.ico></head><body class="max-width mx-auto px3 ltr"><div class="content index py4"><div id=header-post><a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
+<a id=menu-icon-tablet href=#><i class="fas fa-bars fa-lg"></i></a>
+<a id=top-icon-tablet href=# onclick='$("html, body").animate({scrollTop:0},"fast")' style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+<span id=menu><span id=nav><ul><li><a href=/>~/</a></li><li><a href=/posts>~/posts</a></li><li><a href=/about>~/about</a></li><li><a href=/work>~/work</a></li></ul></span><br><span id=actions><ul><li><a class=icon href=https://jsnv.dev/posts/gdb_refresher/ aria-label=Previous><i class="fas fa-chevron-left" aria-hidden=true onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li><li><a class=icon href=# onclick='$("html, body").animate({scrollTop:0},"fast")' aria-label="Top of Page"><i class="fas fa-chevron-up" aria-hidden=true onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li><li><a class=icon href=# aria-label=Share><i class="fas fa-share-alt" aria-hidden=true onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li></ul><span id=i-prev class=info style=display:none>Previous post</span>
+<span id=i-next class=info style=display:none>Next post</span>
+<span id=i-top class=info style=display:none>Back to top</span>
+<span id=i-share class=info style=display:none>Share post</span></span><br><div id=share style=display:none><ul><li><a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f" aria-label=Facebook><i class="fab fa-facebook" aria-hidden=true></i></a></li><li><a class=icon href="https://twitter.com/share?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&text=Go%20Programming%20Notes" aria-label=Twitter><i class="fab fa-twitter" aria-hidden=true></i></a></li><li><a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&title=Go%20Programming%20Notes" aria-label=Linkedin><i class="fab fa-linkedin" aria-hidden=true></i></a></li><li><a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&is_video=false&description=Go%20Programming%20Notes" aria-label=Pinterest><i class="fab fa-pinterest" aria-hidden=true></i></a></li><li><a class=icon href="mailto:?subject=Go%20Programming%20Notes&body=Check out this article: https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f" aria-label=Email><i class="fas fa-envelope" aria-hidden=true></i></a></li><li><a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&title=Go%20Programming%20Notes" aria-label=Pocket><i class="fab fa-get-pocket" aria-hidden=true></i></a></li><li><a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&title=Go%20Programming%20Notes" aria-label=reddit><i class="fab fa-reddit" aria-hidden=true></i></a></li><li><a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&name=Go%20Programming%20Notes&description=%3ch1%20id%3d%22go-programming-notes%22%3eGo%20Programming%20Notes%3c%2fh1%3e%0a%3cp%3eThese%20are%20my%20notes%20from%20the%20%3ca%20href%3d%22https%3a%2f%2fwww.udemy.com%2fcourse%2fgo-the-complete-developers-guide%2f%22%3e%3ccode%3eGo%3a%20The%20Complete%20Developer%27s%20Guide%20%28Golang%29%3c%2fcode%3e%3c%2fa%3e%20course.%20You%20can%20find%20the%20actual%20codes%20at%20my%20%3ca%20href%3d%22https%3a%2f%2fgithub.com%2fjsnv-dev%2flearning_go%22%3e%3ccode%3eGitHub%20repo%3c%2fcode%3e%3c%2fa%3e.%3c%2fp%3e%0a%3ch2%20id%3d%22getting-started-with-go%22%3eGetting%20Started%20with%20Go%3c%2fh2%3e%0a%3ch3%20id%3d%22five-important-questions%22%3eFive%20Important%20Questions%3c%2fh3%3e%0a%3cp%3eEven%20a%20simple%20Go%20program%20reveals%20five%20fundamental%20aspects%20of%20the%20language%3a%3c%2fp%3e%0a%3cdiv%20class%3d%22highlight%22%3e%3cdiv%20class%3d%22chroma%22%3e%0a%3ctable%20class%3d%22lntable%22%3e%3ctr%3e%3ctd%20class%3d%22lntd%22%3e%0a%3cpre%20tabindex%3d%220%22%20class%3d%22chroma%22%3e%3ccode%3e%3cspan%20class%3d%22lnt%22%3e1%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e2%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e3%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e4%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e5%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e6%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e7%0a%3c%2fspan%3e%3c%2fcode%3e%3c%2fpre%3e%3c%2ftd%3e%0a%3ctd%20class%3d%22lntd%22%3e%0a%3cpre%20tabindex%3d%220%22%20class%3d%22chroma%22%3e%3ccode%20class%3d%22language-go%22%20data-lang%3d%22go%22%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%3cspan%20class%3d%22kn%22%3epackage%3c%2fspan%3e%20%3cspan%20class%3d%22nx%22%3emain%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%3cspan%20class%3d%22kn%22%3eimport%3c%2fspan%3e%20%3cspan%20class%3d%22s%22%3e%26%2334%3bfmt%26%2334%3b%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%3cspan%20class%3d%22kd%22%3efunc%3c%2fspan%3e%20%3cspan%20class%3d%22nf%22%3emain%3c%2fspan%3e%3cspan%20class%3d%22p%22%3e%28%29%3c%2fspan%3e%20%3cspan%20class%3d%22p%22%3e%7b%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%20%20%20%20%3cspan%20class%3d%22nx%22%3efmt%3c%2fspan%3e%3cspan%20class%3d%22p%22%3e.%3c%2fspan%3e%3cspan%20class%3d%22nf%22%3ePrintln%3c%2fspan%3e%3cspan%20class%3d%22p%22%3e%28%3c%2fspan%3e%3cspan%20class%3d%22s%22%3e%26%2334%3bHi%20there%26%2334%3b%3c%2fspan%3e%3cspan%20class%3d%22p%22%3e%29%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%3cspan%20class%3d%22p%22%3e%7d%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3c%2fcode%3e%3c%2fpre%3e%3c%2ftd%3e%3c%2ftr%3e%3c%2ftable%3e%0a%3c%2fdiv%3e%0a%3c%2fdiv%3e%3cp%3eLooking%20at%20this%20program%20raises%20five%20essential%20questions%20that%20form%20the%20foundation%20of%20understanding%20Go%3a%3c%2fp%3e" aria-label=Tumblr><i class="fab fa-tumblr" aria-hidden=true></i></a></li><li><a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&t=Go%20Programming%20Notes" aria-label="Hacker News"><i class="fab fa-hacker-news" aria-hidden=true></i></a></li></ul></div><div id=toc><nav id=TableOfContents><ul><li><a href=#getting-started-with-go>Getting Started with Go</a><ul><li><a href=#five-important-questions>Five Important Questions</a></li><li><a href=#go-packages>Go Packages</a></li><li><a href=#import-statements>Import Statements</a></li><li><a href=#file-organization>File Organization</a></li></ul></li><li><a href=#working-with-variables>Working with Variables</a><ul><li><a href=#variable-declarations>Variable Declarations</a></li><li><a href=#functions-and-return-types>Functions and Return Types</a></li><li><a href=#slices-and-for-loops>Slices and For Loops</a></li></ul></li><li><a href=#object-oriented-programming-vs-go-approach>Object-Oriented Programming vs Go Approach</a><ul><li><a href=#custom-type-declarations>Custom Type Declarations</a></li><li><a href=#receiver-functions>Receiver Functions</a></li></ul></li><li><a href=#creating-a-new-deck>Creating a New Deck</a><ul><li><a href=#creating-a-new-deck-1>Creating a New Deck</a></li><li><a href=#slice-range-syntax>Slice Range Syntax</a></li><li><a href=#multiple-return-values>Multiple Return Values</a></li></ul></li><li><a href=#working-with-files-and-data>Working with Files and Data</a><ul><li><a href=#byte-slices>Byte Slices</a></li><li><a href=#deck-to-string>Deck to String</a></li><li><a href=#saving-data-to-hard-drive>Saving Data to Hard Drive</a></li></ul></li><li><a href=#error-handling>Error Handling</a></li><li><a href=#random-number-generation-and-shuffling>Random Number Generation and Shuffling</a></li><li><a href=#testing>Testing</a></li><li><a href=#understanding-structs>Understanding Structs</a></li><li><a href=#maps>Maps</a></li><li><a href=#interfaces>Interfaces</a></li><li><a href=#concurrency>Concurrency</a><ul><li><a href=#function-literal>Function Literal</a></li></ul></li></ul></nav></div></span></div><article class=post itemscope itemtype=http://schema.org/BlogPosting><header><h1 class=posttitle itemprop="name headline">Go Programming Notes</h1><div class=meta><div class=postdate><time datetime="2025-01-26 00:00:00 +0000 UTC" itemprop=datePublished>2025-01-26</time></div><div class=article-read-time><i class="far fa-clock"></i>
+12 minute read</div><div class=article-category><i class="fas fa-archive"></i>
+<a class=category-link href=/categories/course>course</a></div><div class=article-tag><i class="fas fa-tag"></i>
+<a class=tag-link href=/tags/programming rel=tag>programming</a>
+,
+<a class=tag-link href=/tags/learning rel=tag>learning</a></div></div></header><div class=content itemprop=articleBody><h1 id=go-programming-notes>Go Programming Notes</h1><p>These are my notes from the <a href=https://www.udemy.com/course/go-the-complete-developers-guide/><code>Go: The Complete Developer's Guide (Golang)</code></a> course. You can find the actual codes at my <a href=https://github.com/jsnv-dev/learning_go><code>GitHub repo</code></a>.</p><h2 id=getting-started-with-go>Getting Started with Go</h2><h3 id=five-important-questions>Five Important Questions</h3><p>Even a simple Go program reveals five fundamental aspects of the language:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hi there&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Looking at this program raises five essential questions that form the foundation of understanding Go:</p><ol><li>How do programmers run code in a Go project?</li><li>What does <code>package main</code> signify?</li><li>What purpose does <code>import "fmt"</code> serve?</li><li>What is the <code>func</code> keyword&rsquo;s role?</li><li>How should code be organized in Go files?</li></ol><p>The answers to these questions reveal how Go programs are structured and executed.</p><h3 id=go-packages>Go Packages</h3><p>Every Go file must declare its package membership. Two distinct types of packages exist in Go:</p><ol><li><p>Executable Packages:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Entry point for executable programs</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The word &ldquo;main&rdquo; is special - it tells Go to create a program that can be run directly. An executable package must contain a <code>main()</code> function.</p></li><li><p>Reusable Packages:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>cards</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>newDeck</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Helper code for other packages</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Any package name besides &ldquo;main&rdquo; creates a reusable package, meant to provide helper code and functionality to other packages.</p></li></ol><h3 id=import-statements>Import Statements</h3><p>Imports give access to code from other packages. For example:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;io&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Or using the grouped syntax:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;io&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>Each import makes that package&rsquo;s functionality available in the current file. The <code>fmt</code> package, short for &ldquo;format&rdquo;, provides functions for formatting and printing output.</p><h3 id=file-organization>File Organization</h3><p>Go enforces a specific file structure:</p><ol><li>Package declaration at the top</li><li>Import statements</li><li>Code/function declarations</li></ol><p>This organization isn&rsquo;t merely conventional - it&rsquo;s required by the Go compiler:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Required order</span>
+</span></span><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Code here</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=working-with-variables>Working with Variables</h2><h3 id=variable-declarations>Variable Declarations</h3><p>Go provides multiple ways to declare variables, each serving different purposes:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Long form with explicit type</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>card</span> <span class=kt>string</span> <span class=p>=</span> <span class=s>&#34;Ace of Spades&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Let Go infer the type</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>card</span> <span class=p>=</span> <span class=s>&#34;Ace of Spades&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Short declaration syntax</span>
+</span></span><span class=line><span class=cl><span class=nx>card</span> <span class=o>:=</span> <span class=s>&#34;Ace of Spades&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>:=</code> operator both declares and initializes a variable, but it can only be used inside functions. The var keyword works anywhere. Go assigns zero values to variables that aren&rsquo;t explicitly initialized:</p><ul><li>string <code>""</code></li><li>int <code>0</code></li><li>bool <code>false</code></li></ul><h3 id=functions-and-return-types>Functions and Return Types</h3><p>Functions in Go must declare both their parameter types and return types:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>newCard</span><span class=p>()</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s>&#34;Five of Diamonds&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Multiple return values</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>deal</span><span class=p>(</span><span class=nx>d</span> <span class=nx>deck</span><span class=p>,</span> <span class=nx>handSize</span> <span class=kt>int</span><span class=p>)</span> <span class=p>(</span><span class=nx>deck</span><span class=p>,</span> <span class=nx>deck</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>d</span><span class=p>[:</span><span class=nx>handSize</span><span class=p>],</span> <span class=nx>d</span><span class=p>[</span><span class=nx>handSize</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The return type appears after the parameter list. If a function declares a return type, the Go compiler ensures it always returns that type of value.</p><h3 id=slices-and-for-loops>Slices and For Loops</h3><p>Slices provide dynamic arrays in Go. The for loop with range makes iteration straightforward:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>cards</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;Ace of Diamonds&#34;</span><span class=p>,</span> <span class=s>&#34;Four of Clubs&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>cards</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>cards</span><span class=p>,</span> <span class=s>&#34;Six of Spades&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>card</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>cards</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>card</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The range keyword provides both the index and value of each element. Using <code>_</code> ignores values you don&rsquo;t need:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>card</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>cards</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>card</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=object-oriented-programming-vs-go-approach>Object-Oriented Programming vs Go Approach</h2><p>When creating a deck of cards, an object-oriented language might use a class with properties and methods:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Theoretical OO approach (not valid Go)</span>
+</span></span><span class=line><span class=cl><span class=nx>class</span> <span class=nx>Deck</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>private</span> <span class=nx>cards</span> <span class=p>[]</span><span class=kt>string</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nx>public</span> <span class=nf>shuffle</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// shuffle the cards</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Go takes a fundamentally different approach. Instead of creating classes with properties and methods, Go extends existing types and adds behavior to them:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Go&#39;s approach</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>deck</span> <span class=p>[]</span><span class=kt>string</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>d</span> <span class=nx>deck</span><span class=p>)</span> <span class=nf>shuffle</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// shuffle the cards</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This difference is significant. Go favors composition over inheritance, and its type system reflects this philosophy. Rather than creating complex hierarchies of classes, Go programmers combine simple types to build more complex ones.</p><h3 id=custom-type-declarations>Custom Type Declarations</h3><p>Creating a new type in Go involves extending an existing type:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>deck</span> <span class=p>[]</span><span class=kt>string</span>
+</span></span></code></pre></td></tr></table></div></div><p>This line creates a new type called <code>deck</code> that extends the behavior of a slice of strings. This new type inherits all the capabilities of a string slice but can also have its own specific methods. This approach demonstrates Go&rsquo;s focus on simplicity and explicit behavior.</p><h3 id=receiver-functions>Receiver Functions</h3><p>Receiver functions add methods to custom types:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>d</span> <span class=nx>deck</span><span class=p>)</span> <span class=nb>print</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>card</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>d</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>card</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>(d deck)</code> before the function name is called a receiver. It means any variable of type <code>deck</code> now has access to the print method. This can be called like:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>cards</span> <span class=o>:=</span> <span class=nf>newDeck</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nx>cards</span><span class=p>.</span><span class=nb>print</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>By convention, the receiver variable uses a one or two letter abbreviation that matches the type name (d for deck). This keeps the code concise while maintaining readability.</p><h2 id=creating-a-new-deck>Creating a New Deck</h2><h3 id=creating-a-new-deck-1>Creating a New Deck</h3><p>The newDeck function demonstrates how to create and initialize a custom type:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>newDeck</span><span class=p>()</span> <span class=nx>deck</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cards</span> <span class=o>:=</span> <span class=nx>deck</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nx>cardSuits</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;Spades&#34;</span><span class=p>,</span> <span class=s>&#34;Diamonds&#34;</span><span class=p>,</span> <span class=s>&#34;Hearts&#34;</span><span class=p>,</span> <span class=s>&#34;Clubs&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cardValues</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;Ace&#34;</span><span class=p>,</span> <span class=s>&#34;Two&#34;</span><span class=p>,</span> <span class=s>&#34;Three&#34;</span><span class=p>,</span> <span class=s>&#34;Four&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>suit</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>cardSuits</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>cardValues</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>cards</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>cards</span><span class=p>,</span> <span class=nx>value</span><span class=o>+</span><span class=s>&#34; of &#34;</span><span class=o>+</span><span class=nx>suit</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>cards</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This function shows several important Go concepts:</p><ul><li>Creating an empty deck using the custom type</li><li>Using nested loops to generate combinations</li><li>Building strings by concatenation</li><li>Returning the custom type</li></ul><h3 id=slice-range-syntax>Slice Range Syntax</h3><p>Go provides special syntax for working with parts of a slice:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>cards</span> <span class=o>:=</span> <span class=nf>newDeck</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nx>hand</span><span class=p>,</span> <span class=nx>remainingCards</span> <span class=o>:=</span> <span class=nx>cards</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=mi>5</span><span class=p>],</span> <span class=nx>cards</span><span class=p>[</span><span class=mi>5</span><span class=p>:]</span>
+</span></span></code></pre></td></tr></table></div></div><p>The range syntax <code>[low:high]</code> creates a slice from index <code>low</code> up to (but not including) index <code>high</code>. Omitting a number means &ldquo;start&rdquo; or &ldquo;end&rdquo; respectively:</p><ul><li><code>cards[0:5]</code> - first 5 cards</li><li><code>cards[5:]</code> - everything from index 5 onwards</li><li><code>cards[:5]</code> - first 5 cards (same as [0:5])</li></ul><h3 id=multiple-return-values>Multiple Return Values</h3><p>Functions in Go can return multiple values:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>deal</span><span class=p>(</span><span class=nx>d</span> <span class=nx>deck</span><span class=p>,</span> <span class=nx>handSize</span> <span class=kt>int</span><span class=p>)</span> <span class=p>(</span><span class=nx>deck</span><span class=p>,</span> <span class=nx>deck</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>d</span><span class=p>[:</span><span class=nx>handSize</span><span class=p>],</span> <span class=nx>d</span><span class=p>[</span><span class=nx>handSize</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This enables functions to return related pieces of data together. When calling such functions, you must receive all return values:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>hand</span><span class=p>,</span> <span class=nx>remainingDeck</span> <span class=o>:=</span> <span class=nf>deal</span><span class=p>(</span><span class=nx>cards</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>This feature eliminates the need for special container objects or complex return types, making the code more straightforward and explicit.</p><h2 id=working-with-files-and-data>Working with Files and Data</h2><h3 id=byte-slices>Byte Slices</h3><p>Working with files in Go requires understanding byte slices. A byte slice represents a sequence of raw binary data:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;Hi there!&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>Converting between strings and byte slices is common when working with files because file operations deal with raw binary data. The conversion is explicit, reflecting Go&rsquo;s philosophy of making operations visible and clear.</p><h3 id=deck-to-string>Deck to String</h3><p>Before saving a deck to a file, it needs to be converted to a string:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>d</span> <span class=nx>deck</span><span class=p>)</span> <span class=nf>toString</span><span class=p>()</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>Join</span><span class=p>([]</span><span class=nb>string</span><span class=p>(</span><span class=nx>d</span><span class=p>),</span> <span class=s>&#34;,&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This method:</p><ol><li>Converts the deck to a slice of strings using type conversion</li><li>Joins all cards with commas between them</li><li>Returns a single string representation</li></ol><h3 id=saving-data-to-hard-drive>Saving Data to Hard Drive</h3><p>Writing data to files uses the <code>ioutil</code> package:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>d</span> <span class=nx>deck</span><span class=p>)</span> <span class=nf>saveToFile</span><span class=p>(</span><span class=nx>filename</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>WriteFile</span><span class=p>(</span><span class=nx>filename</span><span class=p>,</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>d</span><span class=p>.</span><span class=nf>toString</span><span class=p>()),</span> <span class=mo>0666</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The process involves:</p><ol><li>Converting the deck to a string</li><li>Converting the string to a byte slice</li><li>Writing the bytes to a file</li><li>Using permissions (0666) to set file access rights</li></ol><h2 id=error-handling>Error Handling</h2><p>In Go, error handling is explicit and straightforward. When reading from files or performing operations that might fail, Go requires direct handling of potential errors. Consider this example from the cards project:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>newDeckFromFile</span><span class=p>(</span><span class=nx>filename</span> <span class=kt>string</span><span class=p>)</span> <span class=nx>deck</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>bs</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>ReadFile</span><span class=p>(</span><span class=nx>filename</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Error:&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nx>s</span> <span class=o>:=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>Split</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>bs</span><span class=p>),</span> <span class=s>&#34;,&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>deck</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This error handling pattern appears throughout Go programs. The <code>if err != nil</code> check is crucial because it allows programs to respond appropriately when things go wrong. In this case, if the file can&rsquo;t be read, the program prints the error and exits rather than continuing with invalid data.</p><h2 id=random-number-generation-and-shuffling>Random Number Generation and Shuffling</h2><p>Implementing the shuffle functionality for our deck reveals important aspects of Go&rsquo;s random number generation. A naive implementation might look like this:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>d</span> <span class=nx>deck</span><span class=p>)</span> <span class=nf>shuffle</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>d</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>newPosition</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nx>d</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=nx>d</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span> <span class=nx>d</span><span class=p>[</span><span class=nx>newPosition</span><span class=p>]</span> <span class=p>=</span> <span class=nx>d</span><span class=p>[</span><span class=nx>newPosition</span><span class=p>],</span> <span class=nx>d</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>However, this implementation has a subtle problem. Go&rsquo;s random number generator needs a seed value to generate truly random numbers. Without setting a seed, the same sequence of random numbers appears every time. Here&rsquo;s the correct implementation:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>d</span> <span class=nx>deck</span><span class=p>)</span> <span class=nf>shuffle</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>source</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>NewSource</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=nx>r</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>d</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>newPosition</span> <span class=o>:=</span> <span class=nx>r</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nx>d</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=nx>d</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span> <span class=nx>d</span><span class=p>[</span><span class=nx>newPosition</span><span class=p>]</span> <span class=p>=</span> <span class=nx>d</span><span class=p>[</span><span class=nx>newPosition</span><span class=p>],</span> <span class=nx>d</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This version uses the current time as a seed, ensuring different random sequences on each program run. The difference illustrates how Go encourages explicit handling of program state.</p><h2 id=testing>Testing</h2><p>Go includes a testing framework in its standard library. Test files are identified by the <code>_test.go</code> suffix. Here&rsquo;s an example testing the deck creation:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestNewDeck</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>d</span> <span class=o>:=</span> <span class=nf>newDeck</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>d</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>16</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected deck length of 16, but got %v&#34;</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>d</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>d</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>!=</span> <span class=s>&#34;Ace of Spades&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected first card of Ace of Spades, but got %v&#34;</span><span class=p>,</span> <span class=nx>d</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>d</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=nx>d</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>!=</span> <span class=s>&#34;Four of Clubs&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected last card of Four of Clubs, but got %v&#34;</span><span class=p>,</span> <span class=nx>d</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=nx>d</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This test demonstrates several testing principles in Go:</p><ol><li>Test functions start with &ldquo;Test&rdquo;</li><li>They take a single parameter of type <code>*testing.T</code></li><li>Errors are reported using the <code>t.Errorf</code> function</li><li>Tests verify specific, expected behaviors</li></ol><p>Testing file operations requires cleanup to ensure tests remain reliable:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestSaveToDeckAndNewDeckFromFile</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>os</span><span class=p>.</span><span class=nf>Remove</span><span class=p>(</span><span class=s>&#34;_decktesting&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nx>deck</span> <span class=o>:=</span> <span class=nf>newDeck</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>deck</span><span class=p>.</span><span class=nf>saveToFile</span><span class=p>(</span><span class=s>&#34;_decktesting&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nx>loadedDeck</span> <span class=o>:=</span> <span class=nf>newDeckFromFile</span><span class=p>(</span><span class=s>&#34;_decktesting&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>loadedDeck</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>16</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected 16 cards in deck, got %v&#34;</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>loadedDeck</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nx>os</span><span class=p>.</span><span class=nf>Remove</span><span class=p>(</span><span class=s>&#34;_decktesting&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This test demonstrates proper cleanup by removing test files both before and after the test runs. This practice prevents test files from accumulating and ensures each test starts with a clean state.</p><h2 id=understanding-structs>Understanding Structs</h2><p>Structs provide a way to create composite types that group related data together. Unlike the deck type, which extended a slice, structs combine different types of data:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>contactInfo</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>email</span>   <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=nx>zipCode</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>person</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>firstName</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=nx>lastName</span>  <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=nx>contact</span>   <span class=nx>contactInfo</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This structure shows how Go allows composition of types. Instead of inheritance, Go encourages building complex types by combining simpler ones. When creating instances of structs, Go provides several syntax options:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// With field names (most clear)</span>
+</span></span><span class=line><span class=cl><span class=nx>jim</span> <span class=o>:=</span> <span class=nx>person</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>firstName</span><span class=p>:</span> <span class=s>&#34;Jim&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>lastName</span><span class=p>:</span> <span class=s>&#34;Party&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>contact</span><span class=p>:</span> <span class=nx>contactInfo</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>email</span><span class=p>:</span> <span class=s>&#34;jim@gmail.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>zipCode</span><span class=p>:</span> <span class=mi>94000</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Zero value initialization</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>alex</span> <span class=nx>person</span>
+</span></span></code></pre></td></tr></table></div></div><p>The second form demonstrates Go&rsquo;s zero value concept - each field gets a default value appropriate to its type. This predictable initialization is a key feature of Go&rsquo;s design.</p><h2 id=maps>Maps</h2><p>Maps provide a way to create collections of key-value pairs. Unlike structs, which have a fixed set of fields determined at compile time, maps allow dynamic key-value associations:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>colors</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>string</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;red&#34;</span><span class=p>:</span>   <span class=s>&#34;#ff0000&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;green&#34;</span><span class=p>:</span> <span class=s>&#34;#4bf745&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The syntax <code>map[keyType]valueType</code> specifies that all keys must be of one type and all values must be of another type. This type consistency is enforced by the compiler, preventing type-related errors at runtime.</p><p>Maps can also be created using the make function:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>colors</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>string</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>This approach creates an empty map ready for use. Unlike structs, maps must be initialized before use - the zero value of a map is nil, and attempting to add to a nil map causes a runtime panic.</p><p>Adding and removing values from maps uses straightforward syntax:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Adding key-value pairs</span>
+</span></span><span class=line><span class=cl><span class=nx>colors</span><span class=p>[</span><span class=s>&#34;white&#34;</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;#ffffff&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Removing entries</span>
+</span></span><span class=line><span class=cl><span class=nb>delete</span><span class=p>(</span><span class=nx>colors</span><span class=p>,</span> <span class=s>&#34;white&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>Maps differ from structs in several key ways:</p><ol><li>Maps require all keys/values to be the same type</li><li>Maps are reference types (passed by reference)</li><li>Map keys are indexed and can be iterated over</li><li>Map keys don&rsquo;t need to be known at compile time</li></ol><h2 id=interfaces>Interfaces</h2><p>Interfaces solve a common problem in programming: how to make code reusable across different types.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>bot</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>getGreeting</span><span class=p>()</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>englishBot</span> <span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>spanishBot</span> <span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>englishBot</span><span class=p>)</span> <span class=nf>getGreeting</span><span class=p>()</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s>&#34;Hi there!&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>spanishBot</span><span class=p>)</span> <span class=nf>getGreeting</span><span class=p>()</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s>&#34;Hola!&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Instead of writing separate functions to handle each type of bot, interfaces allow writing a single function that works with any type implementing the required methods:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>printGreeting</span><span class=p>(</span><span class=nx>b</span> <span class=nx>bot</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>b</span><span class=p>.</span><span class=nf>getGreeting</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This demonstrates a fundamental principle in Go: interface satisfaction is implicit. Any type that implements the required methods automatically satisfies the interface - no explicit declaration is needed.</p><p>The HTTP package demonstrates practical interface usage through the Reader and Writer interfaces:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>resp</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>http</span><span class=p>.</span><span class=nf>Get</span><span class=p>(</span><span class=s>&#34;http://google.com&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Error:&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The response body implements the Reader interface, which specifies a Read method:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Reader</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This standard interface allows different types (files, network connections, strings) to provide data in a consistent way. The Writer interface serves a similar purpose for output:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Writer</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>These interfaces enable powerful composition, as seen in the io.Copy function:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>io</span><span class=p>.</span><span class=nf>Copy</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>resp</span><span class=p>.</span><span class=nx>Body</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>This function works with any Reader as input and any Writer as output, demonstrating Go&rsquo;s approach to code reuse through interfaces.</p><h2 id=concurrency>Concurrency</h2><p>Go provides powerful tools for concurrent programming through goroutines and channels. A goroutine is a lightweight thread managed by Go&rsquo;s runtime:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>go</span> <span class=nf>checkLink</span><span class=p>(</span><span class=nx>link</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>go</code> keyword launches a function in a new goroutine. The Go scheduler manages these goroutines, multiplexing them onto operating system threads. This makes concurrent programming more manageable than direct thread manipulation.</p><p>Channels provide safe communication between goroutines:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>c</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Send value through channel</span>
+</span></span><span class=line><span class=cl><span class=nx>c</span> <span class=o>&lt;-</span> <span class=s>&#34;message&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Receive value from channel</span>
+</span></span><span class=line><span class=cl><span class=nx>msg</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>c</span>
+</span></span></code></pre></td></tr></table></div></div><p>The channel operations block until both sender and receiver are ready, providing synchronization without explicit locks. This blocking behavior helps prevent race conditions and makes concurrent code easier to reason about.</p><h3 id=function-literal>Function Literal</h3><p>Function literals (anonymous functions) are often used with goroutines:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>go</span> <span class=kd>func</span><span class=p>(</span><span class=nx>link</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>5</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>checkLink</span><span class=p>(</span><span class=nx>link</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}(</span><span class=nx>l</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>When using function literals with goroutines, variables should be passed as parameters rather than accessed from the enclosing scope. This prevents issues with shared variable access:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Problematic: l is shared</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>l</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>checkLink</span><span class=p>(</span><span class=nx>l</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>  <span class=c1>// l may change</span>
+</span></span><span class=line><span class=cl>    <span class=p>}()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Correct: l is passed as parameter</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>l</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>go</span> <span class=kd>func</span><span class=p>(</span><span class=nx>link</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>checkLink</span><span class=p>(</span><span class=nx>link</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>  <span class=c1>// link is local copy</span>
+</span></span><span class=line><span class=cl>    <span class=p>}(</span><span class=nx>l</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Channel iteration provides a clean way to process a stream of values:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>for</span> <span class=nx>l</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>go</span> <span class=kd>func</span><span class=p>(</span><span class=nx>link</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>5</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nf>checkLink</span><span class=p>(</span><span class=nx>link</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}(</span><span class=nx>l</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This pattern creates continuous monitoring, with each check launching after a delay. The for-range loop continues until the channel is closed, and each iteration spawns a new goroutine to handle the check independently.</p><p>Go&rsquo;s concurrency features work together to enable clear, efficient concurrent programs. Goroutines provide lightweight concurrency, channels ensure safe communication, and the Go runtime manages the actual execution efficiently.</p></div></article><div id=footer-post-container><div id=footer-post><div id=nav-footer style=display:none><ul><li><a href=/>~/</a></li><li><a href=/posts>~/posts</a></li><li><a href=/about>~/about</a></li><li><a href=/work>~/work</a></li></ul></div><div id=toc-footer style=display:none><nav id=TableOfContents><ul><li><a href=#getting-started-with-go>Getting Started with Go</a><ul><li><a href=#five-important-questions>Five Important Questions</a></li><li><a href=#go-packages>Go Packages</a></li><li><a href=#import-statements>Import Statements</a></li><li><a href=#file-organization>File Organization</a></li></ul></li><li><a href=#working-with-variables>Working with Variables</a><ul><li><a href=#variable-declarations>Variable Declarations</a></li><li><a href=#functions-and-return-types>Functions and Return Types</a></li><li><a href=#slices-and-for-loops>Slices and For Loops</a></li></ul></li><li><a href=#object-oriented-programming-vs-go-approach>Object-Oriented Programming vs Go Approach</a><ul><li><a href=#custom-type-declarations>Custom Type Declarations</a></li><li><a href=#receiver-functions>Receiver Functions</a></li></ul></li><li><a href=#creating-a-new-deck>Creating a New Deck</a><ul><li><a href=#creating-a-new-deck-1>Creating a New Deck</a></li><li><a href=#slice-range-syntax>Slice Range Syntax</a></li><li><a href=#multiple-return-values>Multiple Return Values</a></li></ul></li><li><a href=#working-with-files-and-data>Working with Files and Data</a><ul><li><a href=#byte-slices>Byte Slices</a></li><li><a href=#deck-to-string>Deck to String</a></li><li><a href=#saving-data-to-hard-drive>Saving Data to Hard Drive</a></li></ul></li><li><a href=#error-handling>Error Handling</a></li><li><a href=#random-number-generation-and-shuffling>Random Number Generation and Shuffling</a></li><li><a href=#testing>Testing</a></li><li><a href=#understanding-structs>Understanding Structs</a></li><li><a href=#maps>Maps</a></li><li><a href=#interfaces>Interfaces</a></li><li><a href=#concurrency>Concurrency</a><ul><li><a href=#function-literal>Function Literal</a></li></ul></li></ul></nav></div><div id=share-footer style=display:none><ul><li><a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f" aria-label=Facebook><i class="fab fa-facebook fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://twitter.com/share?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&text=Go%20Programming%20Notes" aria-label=Twitter><i class="fab fa-twitter fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&title=Go%20Programming%20Notes" aria-label=Linkedin><i class="fab fa-linkedin fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&is_video=false&description=Go%20Programming%20Notes" aria-label=Pinterest><i class="fab fa-pinterest fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="mailto:?subject=Go%20Programming%20Notes&body=Check out this article: https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f" aria-label=Email><i class="fas fa-envelope fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&title=Go%20Programming%20Notes" aria-label=Pocket><i class="fab fa-get-pocket fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&title=Go%20Programming%20Notes" aria-label=reddit><i class="fab fa-reddit fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&name=Go%20Programming%20Notes&description=%3ch1%20id%3d%22go-programming-notes%22%3eGo%20Programming%20Notes%3c%2fh1%3e%0a%3cp%3eThese%20are%20my%20notes%20from%20the%20%3ca%20href%3d%22https%3a%2f%2fwww.udemy.com%2fcourse%2fgo-the-complete-developers-guide%2f%22%3e%3ccode%3eGo%3a%20The%20Complete%20Developer%27s%20Guide%20%28Golang%29%3c%2fcode%3e%3c%2fa%3e%20course.%20You%20can%20find%20the%20actual%20codes%20at%20my%20%3ca%20href%3d%22https%3a%2f%2fgithub.com%2fjsnv-dev%2flearning_go%22%3e%3ccode%3eGitHub%20repo%3c%2fcode%3e%3c%2fa%3e.%3c%2fp%3e%0a%3ch2%20id%3d%22getting-started-with-go%22%3eGetting%20Started%20with%20Go%3c%2fh2%3e%0a%3ch3%20id%3d%22five-important-questions%22%3eFive%20Important%20Questions%3c%2fh3%3e%0a%3cp%3eEven%20a%20simple%20Go%20program%20reveals%20five%20fundamental%20aspects%20of%20the%20language%3a%3c%2fp%3e%0a%3cdiv%20class%3d%22highlight%22%3e%3cdiv%20class%3d%22chroma%22%3e%0a%3ctable%20class%3d%22lntable%22%3e%3ctr%3e%3ctd%20class%3d%22lntd%22%3e%0a%3cpre%20tabindex%3d%220%22%20class%3d%22chroma%22%3e%3ccode%3e%3cspan%20class%3d%22lnt%22%3e1%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e2%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e3%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e4%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e5%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e6%0a%3c%2fspan%3e%3cspan%20class%3d%22lnt%22%3e7%0a%3c%2fspan%3e%3c%2fcode%3e%3c%2fpre%3e%3c%2ftd%3e%0a%3ctd%20class%3d%22lntd%22%3e%0a%3cpre%20tabindex%3d%220%22%20class%3d%22chroma%22%3e%3ccode%20class%3d%22language-go%22%20data-lang%3d%22go%22%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%3cspan%20class%3d%22kn%22%3epackage%3c%2fspan%3e%20%3cspan%20class%3d%22nx%22%3emain%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%3cspan%20class%3d%22kn%22%3eimport%3c%2fspan%3e%20%3cspan%20class%3d%22s%22%3e%26%2334%3bfmt%26%2334%3b%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%3cspan%20class%3d%22kd%22%3efunc%3c%2fspan%3e%20%3cspan%20class%3d%22nf%22%3emain%3c%2fspan%3e%3cspan%20class%3d%22p%22%3e%28%29%3c%2fspan%3e%20%3cspan%20class%3d%22p%22%3e%7b%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%20%20%20%20%3cspan%20class%3d%22nx%22%3efmt%3c%2fspan%3e%3cspan%20class%3d%22p%22%3e.%3c%2fspan%3e%3cspan%20class%3d%22nf%22%3ePrintln%3c%2fspan%3e%3cspan%20class%3d%22p%22%3e%28%3c%2fspan%3e%3cspan%20class%3d%22s%22%3e%26%2334%3bHi%20there%26%2334%3b%3c%2fspan%3e%3cspan%20class%3d%22p%22%3e%29%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3cspan%20class%3d%22line%22%3e%3cspan%20class%3d%22cl%22%3e%3cspan%20class%3d%22p%22%3e%7d%3c%2fspan%3e%0a%3c%2fspan%3e%3c%2fspan%3e%3c%2fcode%3e%3c%2fpre%3e%3c%2ftd%3e%3c%2ftr%3e%3c%2ftable%3e%0a%3c%2fdiv%3e%0a%3c%2fdiv%3e%3cp%3eLooking%20at%20this%20program%20raises%20five%20essential%20questions%20that%20form%20the%20foundation%20of%20understanding%20Go%3a%3c%2fp%3e" aria-label=Tumblr><i class="fab fa-tumblr fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjsnv.dev%2fposts%2fgo_programming_notes%2f&t=Go%20Programming%20Notes" aria-label="Hacker News"><i class="fab fa-hacker-news fa-lg" aria-hidden=true></i></a></li></ul></div><div id=actions-footer><a id=menu-toggle class=icon href=# onclick='return $("#nav-footer").toggle(),!1' aria-label=Menu><i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
+<a id=toc-toggle class=icon href=# onclick='return $("#toc-footer").toggle(),!1' aria-label=TOC><i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
+<a id=share-toggle class=icon href=# onclick='return $("#share-footer").toggle(),!1' aria-label=Share><i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
+<a id=top style=display:none class=icon href=# onclick='$("html, body").animate({scrollTop:0},"fast")' aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a></div></div></div><footer id=footer><div class=footer-left>Copyright &copy; 2025 jsn>
+<a class=icon target=_blank rel=noopener href=https://github.com/jsnv-dev aria-label=github><i class="fab fa-github" aria-hidden=true></i>
+</a><a class=icon target=_blank rel=noopener href=https://www.linkedin.com/in/jasonvillaluna aria-label=linkedin><i class="fab fa-linkedin" aria-hidden=true></i></a></div><div class=footer-right><nav><ul><li><a href=/>~/</a></li><li><a href=/posts>~/posts</a></li><li><a href=/about>~/about</a></li><li><a href=/work>~/work</a></li></ul></nav></div></footer></div></body><link rel=stylesheet href=/lib/font-awesome/css/all.min.css><script src=/lib/jquery/jquery.min.js></script><script src=/js/main.js></script><script src=/js/code-copy.js></script></html>

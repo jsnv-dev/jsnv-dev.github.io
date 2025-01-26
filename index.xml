@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsn></title><link>https://jsnv.dev/</link><description>Recent content on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 16 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>GDB Refresher</title><link>https://jsnv.dev/posts/gdb_refresher/</link><pubDate>Thu, 16 Jan 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/gdb_refresher/</guid><description>&lt;h1 id="gdb-refresher">GDB Refresher&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsn></title><link>https://jsnv.dev/</link><description>Recent content on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Go Programming Notes</title><link>https://jsnv.dev/posts/go_programming_notes/</link><pubDate>Sun, 26 Jan 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/go_programming_notes/</guid><description>&lt;h1 id="go-programming-notes">Go Programming Notes&lt;/h1>
+&lt;p>These are my notes from the &lt;a href="https://www.udemy.com/course/go-the-complete-developers-guide/">&lt;code>Go: The Complete Developer's Guide (Golang)&lt;/code>&lt;/a> course. You can find the actual codes at my &lt;a href="https://github.com/jsnv-dev/learning_go">&lt;code>GitHub repo&lt;/code>&lt;/a>.&lt;/p>
+&lt;h2 id="getting-started-with-go">Getting Started with Go&lt;/h2>
+&lt;h3 id="five-important-questions">Five Important Questions&lt;/h3>
+&lt;p>Even a simple Go program reveals five fundamental aspects of the language:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Hi there&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Looking at this program raises five essential questions that form the foundation of understanding Go:&lt;/p></description></item><item><title>GDB Refresher</title><link>https://jsnv.dev/posts/gdb_refresher/</link><pubDate>Thu, 16 Jan 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/gdb_refresher/</guid><description>&lt;h1 id="gdb-refresher">GDB Refresher&lt;/h1>
 &lt;p>This cheatsheet provides a concise summary of the key GDB commands and concepts discussed in &lt;a href="https://www.youtube.com/watch?v=r185fCzdw8Y&amp;amp;list=PL-ymxv0nOtqqQzEncNuE6jetlJAiBUda-">&lt;code>Debugging Refresher&lt;/code>&lt;/a> tutorial. It covers basic commands, memory examination, variable manipulation, disassembly, breakpoint management, scripting, configuration, and tips for using GDB.&lt;/p>
 &lt;h2 id="basic-commands">Basic Commands&lt;/h2>
 &lt;ul>
