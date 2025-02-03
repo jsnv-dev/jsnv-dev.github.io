@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Learning on jsn></title><link>https://jsnv.dev/tags/learning/</link><description>Recent content in Learning on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 02 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/tags/learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Nullcon Goa Hack IM 2025 CTF</title><link>https://jsnv.dev/posts/ctf_nullcon_goa_hack_im_2025/</link><pubDate>Sun, 02 Feb 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/ctf_nullcon_goa_hack_im_2025/</guid><description>&lt;h1 id="web-craphp-crc-collision-challenge-walkthrough">Web Craphp: CRC Collision Challenge Walkthrough&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ctf on jsn></title><link>https://jsnv.dev/tags/ctf/</link><description>Recent content in Ctf on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 02 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/tags/ctf/index.xml" rel="self" type="application/rss+xml"/><item><title>Nullcon Goa Hack IM 2025 CTF</title><link>https://jsnv.dev/posts/ctf_nullcon_goa_hack_im_2025/</link><pubDate>Sun, 02 Feb 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/ctf_nullcon_goa_hack_im_2025/</guid><description>&lt;h1 id="web-craphp-crc-collision-challenge-walkthrough">Web Craphp: CRC Collision Challenge Walkthrough&lt;/h1>
 &lt;h2 id="challenge">Challenge&lt;/h2>
 &lt;p>&lt;img src="Pasted%20image%2020250202222829.png" alt="">&lt;/p>
 &lt;h2 id="initial-reconnaissance">Initial Reconnaissance&lt;/h2>
@@ -256,32 +256,4 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="technical-analysis">Technical Analysis&lt;/h2>
-&lt;p>The source code analysis reveals several critical components:&lt;/p></description></item><item><title>Go Programming Notes</title><link>https://jsnv.dev/posts/go_programming_notes/</link><pubDate>Sun, 26 Jan 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/go_programming_notes/</guid><description>&lt;h1 id="go-programming-notes">Go Programming Notes&lt;/h1>
-&lt;p>These are my notes from the &lt;a href="https://www.udemy.com/course/go-the-complete-developers-guide/">&lt;code>Go: The Complete Developer's Guide (Golang)&lt;/code>&lt;/a> course. You can find the actual codes at my &lt;a href="https://github.com/jsnv-dev/learning_go">&lt;code>GitHub repo&lt;/code>&lt;/a>.&lt;/p>
-&lt;h2 id="getting-started-with-go">Getting Started with Go&lt;/h2>
-&lt;h3 id="five-important-questions">Five Important Questions&lt;/h3>
-&lt;p>Even a simple Go program reveals five fundamental aspects of the language:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Hi there&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>Looking at this program raises five essential questions that form the foundation of understanding Go:&lt;/p></description></item><item><title>You and Your Research by Richard Hamming</title><link>https://jsnv.dev/posts/you_and_your_research/</link><pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/you_and_your_research/</guid><description>&lt;h1 id="lessons-from-richard-hamming">Lessons from Richard Hamming&lt;/h1>
-&lt;p>In his 1986 talk &lt;a href="https://www.cs.virginia.edu/~robins/YouAndYourResearch.html">&amp;ldquo;You and Your Research,&amp;rdquo;&lt;/a> renowned mathematician Richard Hamming provided a blueprint for achieving scientific excellence. His message was revolutionary: greatness isn&amp;rsquo;t reserved for geniuses. Instead, it comes from deliberate preparation, consistent effort, and the courage to tackle significant problems. &amp;ldquo;If others would think as hard as I did,&amp;rdquo; he quoted Newton, &amp;ldquo;they would get similar results.&amp;rdquo;&lt;/p>
-&lt;h2 id="the-foundation-preparation-and-courage">The Foundation: Preparation and Courage&lt;/h2>
-&lt;p>Hamming emphasized two fundamental qualities for scientific success:&lt;/p></description></item></channel></rss>
+&lt;p>The source code analysis reveals several critical components:&lt;/p></description></item></channel></rss>

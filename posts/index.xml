@@ -1,4 +1,262 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on jsn></title><link>https://jsnv.dev/posts/</link><description>Recent content in Posts on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Go Programming Notes</title><link>https://jsnv.dev/posts/go_programming_notes/</link><pubDate>Sun, 26 Jan 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/go_programming_notes/</guid><description>&lt;h1 id="go-programming-notes">Go Programming Notes&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on jsn></title><link>https://jsnv.dev/posts/</link><description>Recent content in Posts on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 02 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Nullcon Goa Hack IM 2025 CTF</title><link>https://jsnv.dev/posts/ctf_nullcon_goa_hack_im_2025/</link><pubDate>Sun, 02 Feb 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/ctf_nullcon_goa_hack_im_2025/</guid><description>&lt;h1 id="web-craphp-crc-collision-challenge-walkthrough">Web Craphp: CRC Collision Challenge Walkthrough&lt;/h1>
+&lt;h2 id="challenge">Challenge&lt;/h2>
+&lt;p>&lt;img src="Pasted%20image%2020250202222829.png" alt="">&lt;/p>
+&lt;h2 id="initial-reconnaissance">Initial Reconnaissance&lt;/h2>
+&lt;p>The challenge presents a login form accessible through a web interface:&lt;/p>
+&lt;p>&lt;img src="Pasted%20image%2020250202222846.png" alt="">&lt;/p>
+&lt;p>The source code, accessible via the &lt;code>?source&lt;/code> parameter, reveals a PHP-based application:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;?&lt;/span>&lt;span class="nx">php&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">ini_set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;error_reporting&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">ini_set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;display_errors&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;source&amp;#39;&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">highlight_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="no">__FILE__&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// https://www.php.net/manual/en/function.crc32.php#28012
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">function&lt;/span> &lt;span class="nf">crc16&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mh">0xFFFF&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nv">$x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">$x&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">strlen&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nv">$string&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="nv">$x&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="nx">ord&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$string&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nv">$x&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nv">$y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">$y&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">$y&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="nv">$crc&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="mh">0x0001&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mh">0x0001&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="nv">$crc&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0xA001&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nv">$crc&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// https://stackoverflow.com/questions/507041/crc8-check-in-php/73305496#73305496
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">function&lt;/span> &lt;span class="nf">crc8&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$input&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$crc8Table&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x00&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x07&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x0E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x09&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x1C&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x1B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x12&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x15&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x38&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x3F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x36&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x31&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x24&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x23&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x2A&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x2D&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x70&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x77&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x7E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x79&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x6C&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x6B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x62&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x65&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x48&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x4F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x46&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x41&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x54&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x53&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x5A&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x5D&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xE0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xE7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xEE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xE9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xFC&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xFB&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF5&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xD8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xDF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD6&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xC4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xC3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xCA&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xCD&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x90&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x97&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x9E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x99&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x8C&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x8B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x82&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x85&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xA8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xAF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA6&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xB4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xB3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xBA&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xBD&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xC7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xC0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xC9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xCE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xDB&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xDC&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD2&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF6&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xE3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xE4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xED&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xEA&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xB7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xB0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xB9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xBE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xAB&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xAC&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA2&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x8F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x88&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x81&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x86&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x93&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x94&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x9D&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x9A&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x27&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x29&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x2E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x3B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x3C&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x35&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x32&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x1F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x18&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x11&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x16&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x03&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x04&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x0D&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x0A&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x57&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x50&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x59&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x5E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x4B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x4C&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x45&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x42&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x6F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x68&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x61&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x66&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x73&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x74&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x7D&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x7A&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x89&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x8E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x87&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x80&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x95&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x92&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x9B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x9C&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xB1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xB6&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xBF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xB8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xAD&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xAA&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA4&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xF9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xFE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xE5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xE2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xEB&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xEC&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xC1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xC6&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xCF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xC8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xDD&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xDA&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD4&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x69&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x6E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x67&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x60&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x75&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x72&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x7B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x7C&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x51&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x56&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x5F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x58&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x4D&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x4A&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x43&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x44&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x19&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x1E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x17&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x05&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x02&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x0B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x0C&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x21&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x26&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x2F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x28&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x3D&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x3A&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x33&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x34&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x4E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x49&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x40&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x47&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x52&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x55&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x5C&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x5B&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x76&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x71&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x78&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x7F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x6A&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x6D&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x64&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x63&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x3E&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x39&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x30&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x37&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x22&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x25&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x2C&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x2B&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x06&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x01&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x08&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x0F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x1A&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x1D&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x14&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x13&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xAE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xA7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xB2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xB5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xBC&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xBB&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0x96&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x91&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x98&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x9F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x8A&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x8D&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x84&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0x83&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xDE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xD7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xC2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xC5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xCC&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xCB&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mh">0xE6&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xE1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xE8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xEF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xFA&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xFD&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mh">0xF3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$byteArray&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">unpack&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;C*&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$input&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">count&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$byteArray&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nv">$i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">$i&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="nv">$len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">$i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$crc8Table&lt;/span>&lt;span class="p">[(&lt;/span>&lt;span class="nv">$crc&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="nv">$byteArray&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nv">$i&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="mh">0xff&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nv">$crc&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="mh">0xff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$MYPASSWORD&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;AdM1nP@assW0rd!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">include&lt;/span> &lt;span class="s2">&amp;#34;flag.php&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;password&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$MYPASSWORD&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nx">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;password&amp;#39;&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$pwhash1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">crc16&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$MYPASSWORD&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$pwhash2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">crc8&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$MYPASSWORD&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;password&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$pwhash3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">crc16&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$password&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$pwhash4&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">crc8&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$password&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$MYPASSWORD&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nv">$password&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;oops. Try harder!&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$pwhash1&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nv">$pwhash3&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Oops. Nope. Try harder!&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$pwhash2&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nv">$pwhash4&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;OoOps. Not quite. Try harder!&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$access&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$access&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">echo&lt;/span> &lt;span class="s2">&amp;#34;You win a flag: &lt;/span>&lt;span class="si">$FLAG&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">echo&lt;/span> &lt;span class="s2">&amp;#34;Denied! :-(&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">echo&lt;/span> &lt;span class="s2">&amp;#34;Try harder!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">?&amp;gt;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&amp;lt;html&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;head&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;title&amp;gt;Craphp&amp;lt;/title&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;/head&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;body&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;h1&amp;gt;Craphp&amp;lt;/h1&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;form action=&amp;#34;/&amp;#34; method=&amp;#34;post&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;label for=&amp;#34;password&amp;#34;&amp;gt;Give me your password!&amp;lt;/label&amp;gt;&amp;lt;br&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;input type=&amp;#34;text&amp;#34; name=&amp;#34;password&amp;#34;&amp;gt;&amp;lt;br&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;button type=&amp;#34;submit&amp;#34;&amp;gt;Submit&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;/form&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;p&amp;gt;To view the source code, &amp;lt;a href=&amp;#34;/?source&amp;#34;&amp;gt;click here.&amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> &amp;lt;/body&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&amp;lt;/html&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">Try harder!
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">Craphp
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">Give me your password!
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">To view the source code, click here. 
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="technical-analysis">Technical Analysis&lt;/h2>
+&lt;p>The source code analysis reveals several critical components:&lt;/p></description></item><item><title>Go Programming Notes</title><link>https://jsnv.dev/posts/go_programming_notes/</link><pubDate>Sun, 26 Jan 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/go_programming_notes/</guid><description>&lt;h1 id="go-programming-notes">Go Programming Notes&lt;/h1>
 &lt;p>These are my notes from the &lt;a href="https://www.udemy.com/course/go-the-complete-developers-guide/">&lt;code>Go: The Complete Developer's Guide (Golang)&lt;/code>&lt;/a> course. You can find the actual codes at my &lt;a href="https://github.com/jsnv-dev/learning_go">&lt;code>GitHub repo&lt;/code>&lt;/a>.&lt;/p>
 &lt;h2 id="getting-started-with-go">Getting Started with Go&lt;/h2>
 &lt;h3 id="five-important-questions">Five Important Questions&lt;/h3>
