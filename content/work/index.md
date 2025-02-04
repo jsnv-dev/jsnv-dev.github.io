@@ -13,7 +13,7 @@ draft: false
 
 ---
 
-Previous: [Security Incident Handler](https://web.archive.org/web/20200219230442/https://www.accessnow.org/profile/jason-villaluna/) at [`Access Now`](https://www.accessnow.org)
+[Security Incident Handler](https://web.archive.org/web/20200219230442/https://www.accessnow.org/profile/jason-villaluna/) at [`Access Now`](https://www.accessnow.org)
 
 ### Blog post:
 - [New Facebook phishing attack taking Vietnamese opposition voices offline](https://www.accessnow.org/vietnam-facebook-phishing-attack-take-opposition-voices-offline/)
