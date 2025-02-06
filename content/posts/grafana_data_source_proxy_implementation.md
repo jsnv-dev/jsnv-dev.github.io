@@ -11,7 +11,6 @@ keywords:
   - finding
   - security
 ---
-# Understanding Grafana's Data Source Proxy Whitelist Behavior
 
 During my recent assessment of Grafana's data source functionality, I discovered an interesting behavior regarding how different endpoints handle the data source proxy whitelist. This highlights important security considerations for organizations using Grafana's data source proxy features.
 
