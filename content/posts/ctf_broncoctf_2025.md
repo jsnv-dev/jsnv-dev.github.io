@@ -1,5 +1,5 @@
 ---
-title: BITSCTF 2025
+title: BroncoCTF 2025
 date: 2025-02-17
 draft: false
 tags:
