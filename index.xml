@@ -1,4 +1,47 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsn></title><link>https://jsnv.dev/</link><description>Recent content on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 17 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>BroncoCTF 2025</title><link>https://jsnv.dev/posts/ctf_broncoctf_2025/</link><pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/ctf_broncoctf_2025/</guid><description>&lt;h1 id="mikus-autograph-challenge-walkthrough">Miku&amp;rsquo;s Autograph Challenge Walkthrough&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsn></title><link>https://jsnv.dev/</link><description>Recent content on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 18 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>EHAXCTF 2025</title><link>https://jsnv.dev/posts/ctf_ehaxctf_2025/</link><pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/ctf_ehaxctf_2025/</guid><description>&lt;h1 id="serialize-challenge-walkthrough">Serialize Challenge Walkthrough&lt;/h1>
+&lt;h2 id="challenge">Challenge&lt;/h2>
+&lt;p>&lt;img src="Pasted%20image%2020250218144551.png" alt="Screenshot showing challenge description">&lt;/p>
+&lt;p>The challenge tests the following skills:&lt;/p>
+&lt;ul>
+&lt;li>JavaScript deobfuscation and analysis&lt;/li>
+&lt;li>Python pickle deserialization exploitation&lt;/li>
+&lt;li>Command injection techniques&lt;/li>
+&lt;li>Data exfiltration methods&lt;/li>
+&lt;/ul>
+&lt;p>Required background knowledge includes:&lt;/p>
+&lt;ul>
+&lt;li>JavaScript debugging&lt;/li>
+&lt;li>Python pickle serialization&lt;/li>
+&lt;li>Command injection techniques&lt;/li>
+&lt;li>Web request manipulation&lt;/li>
+&lt;/ul>
+&lt;h2 id="initial-analysis">Initial Analysis&lt;/h2>
+&lt;p>The challenge presents a login page with client-side JavaScript validation. Inspection of the source code reveals heavily obfuscated JavaScript:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">form&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;login-form&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Login to get flag&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">input&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;text&amp;#34;&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;username&amp;#34;&lt;/span> &lt;span class="na">placeholder&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;Enter your username&amp;#34;&lt;/span> &lt;span class="na">required&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">input&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;password&amp;#34;&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;password&amp;#34;&lt;/span> &lt;span class="na">placeholder&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;Enter your password&amp;#34;&lt;/span> &lt;span class="na">required&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">button&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;submit&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Login&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">form&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="err">[][(![]+[])[+[]]... redacted&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The full HTML source code is available in &lt;a href="https://gist.github.com/jsnv-dev/fdf50b45b97ffa8f0083adfda7d11429">this gist&lt;/a>&lt;/p></description></item><item><title>BroncoCTF 2025</title><link>https://jsnv.dev/posts/ctf_broncoctf_2025/</link><pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/ctf_broncoctf_2025/</guid><description>&lt;h1 id="mikus-autograph-challenge-walkthrough">Miku&amp;rsquo;s Autograph Challenge Walkthrough&lt;/h1>
 &lt;h2 id="challenge">Challenge&lt;/h2>
 &lt;p>&lt;img src="Pasted%20image%2020250217154311.png" alt="">&lt;/p>
 &lt;h2 id="initial-reconnaissance">Initial Reconnaissance&lt;/h2>
