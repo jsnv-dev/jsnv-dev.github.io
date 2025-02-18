@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsn></title><link>https://jsnv.dev/</link><description>Recent content on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 17 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>BITSCTF 2025</title><link>https://jsnv.dev/posts/ctf_broncoctf_2025/</link><pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/ctf_broncoctf_2025/</guid><description>&lt;h1 id="mikus-autograph-challenge-walkthrough">Miku&amp;rsquo;s Autograph Challenge Walkthrough&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsn></title><link>https://jsnv.dev/</link><description>Recent content on jsn></description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 17 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jsnv.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>BroncoCTF 2025</title><link>https://jsnv.dev/posts/ctf_broncoctf_2025/</link><pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate><guid>https://jsnv.dev/posts/ctf_broncoctf_2025/</guid><description>&lt;h1 id="mikus-autograph-challenge-walkthrough">Miku&amp;rsquo;s Autograph Challenge Walkthrough&lt;/h1>
 &lt;h2 id="challenge">Challenge&lt;/h2>
 &lt;p>&lt;img src="Pasted%20image%2020250217154311.png" alt="">&lt;/p>
 &lt;h2 id="initial-reconnaissance">Initial Reconnaissance&lt;/h2>
@@ -968,8 +968,8 @@ The usage are detailed in: &lt;a href="https://man7.org/linux/man-pages/man2/soc
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>NASM Code:&lt;/p></description></item><item><title>SLAE x86 - Assignments</title><link>https://jsnv.dev/posts/slae_x86/</link><pubDate>Mon, 18 Oct 2021 05:49:49 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86/</guid><description>&lt;h1 id="securitytube-linux-assembly-expert-x86-assignmentshttpswwwpentesteracademycomcourseid3">&lt;a href="https://www.pentesteracademy.com/course?id=3">SecurityTube Linux Assembly Expert x86 Assignments&lt;/a>&lt;/h1>
-&lt;h2 id="bind-tcp-shellcodeslae_x86_a1">&lt;a href="../slae_x86_a1">Bind TCP Shellcode&lt;/a>&lt;/h2>
+&lt;p>NASM Code:&lt;/p></description></item><item><title>SLAE x86 - Assignments</title><link>https://jsnv.dev/posts/slae_x86/</link><pubDate>Mon, 18 Oct 2021 05:49:49 +0000</pubDate><guid>https://jsnv.dev/posts/slae_x86/</guid><description>&lt;h1 id="securitytube-linux-assembly-expert-x86-assignments">&lt;a href="https://www.pentesteracademy.com/course?id=3">SecurityTube Linux Assembly Expert x86 Assignments&lt;/a>&lt;/h1>
+&lt;h2 id="bind-tcp-shellcode">&lt;a href="../slae_x86_a1">Bind TCP Shellcode&lt;/a>&lt;/h2>
 &lt;ul>
 &lt;li>Create a shell bind tcp shellcode
 &lt;ul>
@@ -979,7 +979,7 @@ The usage are detailed in: &lt;a href="https://man7.org/linux/man-pages/man2/soc
 &lt;/li>
 &lt;li>Port number should be easily configurable&lt;/li>
 &lt;/ul>
-&lt;h2 id="reverse-tcp-shellcodeslae_x86_a2">&lt;a href="../slae_x86_a2">Reverse TCP Shellcode&lt;/a>&lt;/h2>
+&lt;h2 id="reverse-tcp-shellcode">&lt;a href="../slae_x86_a2">Reverse TCP Shellcode&lt;/a>&lt;/h2>
 &lt;ul>
 &lt;li>Create a shell reverse tcp shellcode
 &lt;ul>
@@ -989,7 +989,7 @@ The usage are detailed in: &lt;a href="https://man7.org/linux/man-pages/man2/soc
 &lt;/li>
 &lt;li>IP and port should be easily configurable&lt;/li>
 &lt;/ul>
-&lt;h2 id="egg-hunter-shellcodeslae_x86_a3">&lt;a href="../slae_x86_a3">Egg Hunter Shellcode&lt;/a>&lt;/h2>
+&lt;h2 id="egg-hunter-shellcode">&lt;a href="../slae_x86_a3">Egg Hunter Shellcode&lt;/a>&lt;/h2>
 &lt;ul>
 &lt;li>Study about egg hunter shellcode&lt;/li>
 &lt;li>Create a working demo of the egg hunter
@@ -998,18 +998,18 @@ The usage are detailed in: &lt;a href="https://man7.org/linux/man-pages/man2/soc
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="custom-shellcode-encoderslae_x86_a4">&lt;a href="../slae_x86_a4">Custom Shellcode Encoder&lt;/a>&lt;/h2>
+&lt;h2 id="custom-shellcode-encoder">&lt;a href="../slae_x86_a4">Custom Shellcode Encoder&lt;/a>&lt;/h2>
 &lt;ul>
 &lt;li>Create a custom encoding scheme&lt;/li>
 &lt;li>PoC using execve-stack as the shellcode to encode with the schema and execute&lt;/li>
 &lt;/ul>
-&lt;h2 id="shellcode-analysisslae_x86_a5">&lt;a href="../slae_x86_a5">Shellcode Analysis&lt;/a>&lt;/h2>
+&lt;h2 id="shellcode-analysis">&lt;a href="../slae_x86_a5">Shellcode Analysis&lt;/a>&lt;/h2>
 &lt;ul>
 &lt;li>Take up at least 3 shellcode samples created using msfpayload for linux/x86&lt;/li>
 &lt;li>Use GDB/ndisasm/libemu to dissect the functionality of the shellcode&lt;/li>
 &lt;li>Present analysis&lt;/li>
 &lt;/ul>
-&lt;h2 id="shellcode-polymorphismslae_x86_a6">&lt;a href="../slae_x86_a6">Shellcode Polymorphism&lt;/a>&lt;/h2>
+&lt;h2 id="shellcode-polymorphism">&lt;a href="../slae_x86_a6">Shellcode Polymorphism&lt;/a>&lt;/h2>
 &lt;ul>
 &lt;li>Take up 3 shellcodes from shell-storm and create polymorphic versions of them to beat pattern matching
 &lt;ul>
@@ -1018,7 +1018,7 @@ The usage are detailed in: &lt;a href="https://man7.org/linux/man-pages/man2/soc
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="custom-shellcode-crypterslae_x86_a7">&lt;a href="../slae_x86_a7">Custom Shellcode Crypter&lt;/a>&lt;/h2>
+&lt;h2 id="custom-shellcode-crypter">&lt;a href="../slae_x86_a7">Custom Shellcode Crypter&lt;/a>&lt;/h2>
 &lt;ul>
 &lt;li>Create a custom crypter&lt;/li>
 &lt;li>Free to use any existing encryption schema&lt;/li>
