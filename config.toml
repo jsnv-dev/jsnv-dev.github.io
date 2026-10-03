@@ -1,4 +1,4 @@
-baseURL = 'https://jsnv.dev/'
+baseURL = 'https://jsnv-dev.github.io/'
 languageCode = 'en-us'
 title = 'jsn>'
 theme = 'cactus'
