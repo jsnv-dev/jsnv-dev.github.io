@@ -1,1 +1,1 @@
-This is for my personal website [https://jsnv.dev](https://jsnv.dev)
+This is for my personal website.
